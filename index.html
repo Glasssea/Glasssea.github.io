@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>윤성찬 포트폴리오</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+            /*font-family: 'Bangers', cursive;*/
+            @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
+            /*font-family: 'Black Han Sans', sans-serif;*/
+            @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap');
+            /*font-family: 'Nanum Gothic Coding', monospace;*/
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+            /*font-family: 'Noto Sans KR', sans-serif;*/
+            @import url('https://webfontworld.github.io/SCoreDream/SCoreDream.css');
+            /*font-family: "SCoreDream";*/
+            @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
+            /*font-family: 'Nanum Myeongjo', serif;*/
+            a:link { color:white; }
+            a:visited { color:white; }
+            a:hover { color:green; }
+            a:active { color:blue; }
+            a{text-decoration:none}
+            a{cursor:pointer}
+
+
+            body{
+                background:linear-gradient(to bottom, rgb(255, 255, 255),rgb(255, 255, 255));
+                margin:0px;
+            } /*#022640*/
+
+            #home{
+                display:flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                position:fixed;
+                z-index: 101;
+                top:0px;
+                left:0px;
+                background-color: black;
+                width:100%;
+                height:100%;
+            }
+            #homePhoto{
+                width:70vw;
+            }
+            #homeHello{
+                z-index: 101;
+                position:absolute;
+                top:140px;
+                opacity:0;
+
+                flex-wrap: nowrap;
+                font-family: 'Nanum Myeongjo', serif;
+                color:rgb(255, 255, 255);
+                font-size:30px;
+                font-weight: 300;
+                text-shadow: -1px 0px rgb(59, 59, 59), 0px 1px rgb(59, 59, 59), 1px 0px rgb(59, 59, 59), 0px -1px rgb(59, 59, 59);
+                transition:all ease 1000ms;
+            }
+            #homeStart{
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                width: 80px;
+                height: 0px;
+                border: 2px solid rgb(255, 255, 255);
+                font-size:13px;
+                color:white;
+                font-family: 'Nanum Myeongjo', serif;
+                z-index:101;
+                position:absolute;
+                bottom:380px;
+                opacity:1;
+                transition:all ease 1000ms;
+            }
+            #hereClick{
+                opacity:0;
+                transition:all ease 1000ms;
+            }
+
+            #navBar{
+                position: fixed;
+                top:0px;
+                left:0px;
+                height:50px;
+                width: 100%;
+                margin:0px;
+                background-color: #ffffff; /*#022640*/
+                color: rgb(0, 0, 0);  /*rgb(108, 34, 34)*/
+                font-size: 30px;
+                font-weight: 900;
+                text-align:center;
+                display: flex;
+                flex-wrap: nowrap;
+                justify-content: center;
+                align-items: center;
+                z-index: 100;
+            }
+            .navBarMenu{
+                display:flex;
+                justify-content: center;
+                white-space: nowrap;
+                width:200px;
+                min-width:200px;
+            }
+            #empty{
+                position:flex;
+                height:50px;
+            }
+            #AboutMe{
+                width:100%;
+                height:700px;
+            }
+            #AM_1{
+                opacity: 1;
+                position:absolute;
+                left:130px;
+                top:180px;
+                width:300px;
+                height:400px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            #AM_2{
+                position: absolute;
+                top:110px;
+                left:190px;
+                font-size:50px;
+                font-weight: bold;
+            }
+            #AM_3{
+                font-family: 'Noto Sans KR', sans-serif;
+                white-space: nowrap;
+                font-size: 40px;
+                line-height: 1.3em;
+                position:absolute;
+                left:500px;
+                top:168px;
+            }
+            #photo1{
+                width:200px;
+
+            }
+
+            #Skills{
+                width: 100%;
+                height: 680px;
+            }
+            #S_1{
+                position: absolute;
+                top:800px;
+                left:190px;
+                font-size:50px;
+                font-weight: bold;
+            }
+            #photo2{
+                width:300px;
+                position:absolute;
+                left:150px;
+                top:930px;
+            }
+            #photo3{
+                width:100px;
+                position:absolute;
+                left:490px;
+                top:930px;
+            }
+            #photo4{
+                width: 200px;
+                position:absolute;
+                left:600px;
+                top:930px;
+            }
+            #photo5{
+                width:200px;
+                position:absolute;
+                left:800px;
+                top: 890px;
+            }
+            #photo6{
+                width:150px;
+                position:absolute;
+                top : 930px;
+                left:1000px;
+            }
+            #photo7{
+                width:200px;
+                position:absolute;
+                top:1080px;
+                left: 170px;
+            }
+            #photo8{
+                width:100px;
+                position: absolute;
+                top:1250px;
+                left:150px;
+            }
+            #photo9{
+                width:100px;
+                position: absolute;
+                top:1250px;
+                left:280px;
+            }
+
+            #Portfolio{
+                width:100%;
+                height:600px;
+            }
+            #portfolio_left{
+                font-size:50px;
+                font-weight: normal;
+                position:absolute;
+                top:1500px;
+                left:480px;
+                cursor:pointer;
+            }
+            #portfolio_right{
+                font-size:50px;
+                font-weight: normal;
+                position:absolute;
+                top:1500px;
+                left:590px;
+                cursor:pointer;
+            }
+            .bigText{
+                font-size:50px;
+            }
+            .smallText{
+            font-size:20px;
+            }
+            #healthB1{
+                position:absolute;
+                z-index: 2;
+                top:1631px;
+                left:71px;
+                width:69px;
+                height:22px;
+                opacity:0.2;
+                animation-name:kkambback;
+                animation-duration:1s;
+                animation-iteration-count:infinite;
+            }
+            #healthB2{
+                position:absolute;
+                z-index: 2;
+                top:2026px;
+                left:152px;
+                width:34px;
+                height:24px;
+                opacity:0.2;
+                animation-name:kkambback;
+                animation-duration:1s;
+                animation-iteration-count:infinite;
+            }
+            #healthB3{
+                position:absolute;
+                z-index: 2;
+                top:1673px;
+                left:557px;
+                width:80px;
+                height:22px;
+                opacity:0.2;
+                animation-name:kkambback;
+                animation-duration:1s;
+                animation-iteration-count:infinite;
+            }
+            @keyframes kkambback{
+                0%{
+                    background:#b7b7b7;
+                    opacity:0.2;
+                }
+                50%{
+                    background:#6FB590;
+                    opacity:0.5;
+                }
+                100%{
+                    background:#b7b7b7;
+                    opacity:0.2;
+                }
+            }
+
+            #p_1{
+                position: absolute;
+                top:1500px;
+                left:190px;
+                font-size:50px;
+                font-weight: bold;
+            }
+            #portfolio1{
+                z-index: 0;
+                opacity:0;
+                transition:all ease 500ms;
+            }
+            #photo10{
+                width:630px;
+                position: absolute;
+                top:1600px;
+                left:50px;
+            }
+            #photo11{
+                width:200px;
+                position:absolute;
+                top:1670px;
+                left:20px;
+                display:none;
+                z-index: 2;
+            }
+            #photo12{
+                width:350px;
+                position:absolute;
+                top:1920px;
+                left:20px;
+                display:none;
+                z-index: 2;
+            }
+            #photo13{
+                width:450px;
+                position:absolute;
+                top:1710px;
+                left:350px;
+                display:none;
+                z-index: 2;
+            }
+            #p1_2{
+                position:absolute;
+                top:1579px;
+                left:740px;
+                font-family: 'Noto Sans KR', sans-serif;
+                font-weight: bold;
+                white-space: nowrap;
+            }
+            #portfolio2{ 
+                z-index: 0;
+                opacity:0;
+                transition:all ease 500ms;
+            }
+            #photo14{
+                z-index:2;
+                width:250px;
+                position: absolute;
+                top:1650px;
+                left:168px;
+            }
+            #photo15{
+                width:580px;
+                position: absolute;
+                top:1600px;
+                left:50px;
+            }
+            #p2_2{
+                position:absolute;
+                top:1579px;
+                left:740px;
+                font-family: 'Noto Sans KR', sans-serif;
+                font-weight: bold;
+                white-space: nowrap;
+            }
+            #portfolio3{
+                z-index: 0;
+                opacity:0;
+                transition:all ease 500ms;
+            }
+            #photo16{
+                width:250px;
+                position:absolute;
+                z-index:3;
+                top:1650px;
+                left:280px;
+            }
+            #photo17{
+                width:250px;
+                position:absolute;
+                z-index:2;
+                top:1850px;
+                left:280px;
+            }
+            #photo18{
+                width:500px;
+                position: absolute;
+                top:1600px;
+                left:50px;
+            }
+            #p3_2{
+                position:absolute;
+                top:1579px;
+                left:640px;
+                font-family: 'Noto Sans KR', sans-serif;
+                font-weight: bold;
+                white-space: nowrap;
+            }
+            #portfolio4{
+                z-index: 0;
+                opacity:0;
+                transition:all ease 500ms;
+            }
+            #p4_1{
+                position:absolute;
+                top:1600px;
+                left:150px;
+            }
+            #photo19{
+                width:400px;
+            }
+            #p4_2{
+                position:absolute;
+                top:1580px;
+                left:640px;
+                font-family: 'Noto Sans KR', sans-serif;
+                font-weight: bold;
+                white-space: nowrap;
+            }
+            #portfolio5{
+                z-index: 0;
+                opacity:0;
+                transition:all ease 500ms;
+            }
+            #p5_1{
+                position:absolute;
+                top:1600px;
+                left:150px;
+            }
+            #photo20{
+                width:400px;
+                height: 290px;
+            }
+            #p5_2{
+                position:absolute;
+                top:1580px;
+                left:640px;
+                font-family: 'Noto Sans KR', sans-serif;
+                font-weight: bold;
+                white-space: nowrap;
+            }
+            #portfolio6{
+                z-index:2;
+                opacity:1;
+                transition:all ease 500ms;
+            }
+            #p6_1{
+                position:absolute;
+                top:1600px;
+                left:150px;
+            }
+            #photo21{
+                width:400px;
+                height: 290px;
+            }
+            #p6_2{
+                position:absolute;
+                top:1580px;
+                left:640px;
+                font-family: 'Noto Sans KR', sans-serif;
+                font-weight: bold;
+                white-space: nowrap;
+            }
+            #link{
+                display:flex;
+                z-index:3;
+                position:absolute;
+                top:1600px;
+                left:150px;
+                width:400px;
+                height: 290px;
+            }
+            #Contact{
+                font-family: "SCoreDream";
+                height:600px;
+            }
+            #C_1{
+                position: absolute;
+                top:2300px;
+                left:190px;
+                font-size:50px;
+                font-weight: bold;
+            }
+            #contactInfo{
+                position:absolute;
+                top: 2039px;
+                left:538px;
+                margin:50px;
+                text-align:center;
+                font-size:20px;
+            }
+
+            #QR{
+                margin:150px 0px 50px 0px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="home">
+            <img id="homePhoto" src="포폴/SC4.jpg">
+            <div id="homeHello">안녕하세요, 신입 개발자 윤성찬입니다.</div>
+            <div id="homeStart"><div id='hereClick'>click</div></div>
+        </div>
+        <div id="navBar">
+            <div class="navBarMenu"><a id="menu1">Home</a></div>
+            <div class="navBarMenu"><a id="menu2">About Me</a></div>
+            <div class="navBarMenu"><a id="menu3">Skills</a></div>
+            <div class="navBarMenu"><a id="menu4">Portfolio</a></div>
+            <div class="navBarMenu"><a id="menu5">Contact</a></div>
+        </div>
+        <div id="empty"></div>
+        <div id="AboutMe">
+            <div id="AM_1">
+                <img id="photo1" src="포폴/증명사진.png">
+            </div>
+            <div id="AM_2">
+                About Me
+            </div>
+            <div id="AM_3">
+                이름 : 윤성찬<br>나이 : 27세<br>학력 : 용인대학교 체육학과 중퇴<br>수료내역 : 2022.3 - 2022.8 미래융합교육원<br>경력 : 신입            </div>
+            </div>
+
+        <div id="Skills">
+            <div id="S_1">
+                Skills
+            </div>
+            <div id="S_2">
+                <img id="photo2" src="포폴/HJC.png">
+                <img id="photo3" src="포폴/python.png">
+                <img id="photo4" src="포폴/nodejs.png">
+                <img id="photo5" src="포폴/django.png">
+                <img id="photo6" src="포폴/spring.png">
+                <img id="photo7" src="포폴/SQL.png">
+                <img id="photo8" src="포폴/pycharm.png">
+                <img id="photo9" src="포폴/visual.png">
+            </div>
+        </div>
+        <div id="Portfolio">
+            <div id="p_1">
+                Portfolio
+            </div>
+            <div id="portfolio_left">
+                <a><</a>
+            </div>
+            <div id="portfolio_right">
+                <a>></a>
+            </div>
+            <a id="link" href="기억의미로/기억의미로.html" target='_blank'></a>
+            <div id="portfolio1">
+                <div id="p1_1">
+                    <div id="healthB1"></div>
+                    <div id="healthB2"></div>
+                    <div id="healthB3"></div>
+                    <img id="photo10" src="포폴/헬스1.png">
+                    <img id="photo11" src="포폴/헬스2.PNG">
+                    <img id="photo12" src="포폴/헬스3.png">
+                    <img id="photo13" src="포폴/헬스4.png">
+                </div>
+                <div id="p1_2">
+                    <span class="bigText">헬스장 회원 관리 시스템</span><br>
+                    <span class="smallText">
+                        사용언어 : python<br>
+                        기능 : <br>
+                        -신규 회원가입, 로그인, 관리자 로그인, 회원정보 text화 저장<br>
+                        -회원권 구매, 메뉴 수정, 메뉴 추가, 결제정보 확인, 환불<br>
+                        -사물함 관리<br>
+                        -python tkinter모듈을 사용하여 UI구성<br>
+                        <br>
+                </div>
+            </div>
+            <div id="portfolio2">
+                <div id="p2_1">
+                    <img id="photo14" src="포폴/Ymecro.png">
+                    <img id="photo15" src="포폴/Y메크로.PNG">
+                </div>
+                <div id="p2_2">                        
+                    <span class="bigText">Ymecro</span>
+                    <span class="smallText"><br>
+                        구현방법 :<br>
+                        -python<br>-selenium<br>-chromedriver<br><br>
+                        기능 : <br>
+                        -웹 자동접속 및 경로 설정(URL, Id, Class, Xpath, Selector)<br>
+                        -마우스 위치이동, 클릭, 키보드입력 자동화<br>
+                        -마지막으로 선택한 선택자의 정보 자동 저장(txt)                        
+                    </span>
+                </div>
+
+            </div>
+            <div id="portfolio3">
+                <div id="p3_1">
+                    <img id="photo16" src="포폴/data1.png">
+                    <img id="photo17" src="포폴/data2.png">
+                    <img id="photo18" src="포폴/지도만들기.PNG">
+                </div>
+                <div id="p3_2">
+                    <span class="bigText">데이터 시각화</span>
+                    <span class="smallText"><br>
+                        사용언어 : python(matplotlib), pandas<br>
+                        1. 지역별 채용 수<br>
+                        python으로 만든 Ymecro(자동 크롤링 프로그램)를 사용하여<br>
+                        사람인에 있는 채용정보 크롤링 후 txt 파일로 자동저장, <br>
+                        이후 그 txt파일을 python 명령어를 사용하여<br>
+                        전처리 과정을 거친 후 pandas와 matplotlib를 활용하여<br>
+                        막대그래프로 시각화<br><br>
+                        2. 경기도 성남시 뺑소니 교통사고 통계<br>
+                        위와같이 Ymecro(자동 크롤링 프로그램)를 사용하여<br>
+                        공공데이터포털에 접속하고<br>
+                        경기도 성남시 뺑소니 교통사고 통계를 xcel파일로 저장 후<br>
+                        pandas와 matplotlib를 활용하여 2차원 막대그래프로 시각화 
+                </div>
+            </div>
+            <div id="portfolio4">
+                <div id="p4_1">
+                    <img id="photo19" src="포폴/도미노웹.png">
+                </div>
+                <div id="p4_2">
+                    <span class="bigText">도미노피자</span>
+                    <span class="smallText"><br>
+                        내용 : 리디자인<br>
+                        1. 상단 메뉴바의 불안정한 움직임 조율<br>
+                        기획 : 상단 메뉴바의 불안정한 움직임 부드럽게 바꿈<br><br>
+                        2. 하단 요소들의 재배치<br>
+                        기획 : 하단 요소들을 블록이 쌓여있는 듯 한 모습으로 배열<br>
+                        도미노 피자의 로고 색상을 메뉴에 적용<br>
+                        맛있어 보이는 피자 메뉴 번갈아가며 노출<br>
+                        기대효과 : 웹 방문시 사용자가 피자를 먹고싶다는 생각이 들게 함<br>
+                        도미노 로고와 비슷한 색상을 보여주어 무의식 중에 로고가 각인되게 함<br><br>
+                        3. 기능
+                        javascript를 이용하여 뉴스가 자동으로 넘어가고,<br>
+                        사용자가 원할 시 클릭을 이용하여 넘길 수 있음.
+                    </span>
+                </div>
+            </div>
+            <div id="portfolio5">
+                <div id="p5_1">
+                    <img id="photo20" src="포폴/파스웹.png" height="150px">
+                </div>
+                <div id="p5_2">
+                    <span class="bigText">파스쿠찌</span>
+                    <span class="smallText"><br>
+                        내용 : 리디자인<br>
+                        디자인 기획 : <br>
+                        1. 배경의 단조로움 해결<br>
+                        기획 : 파스쿠찌의 깨끗하고 쾌적한 매장 사진 배치<br>
+                        기대효과 : 사용자가 매장의 분위기를 느껴 방문하고 싶은 마음이 들게 함<br><br>
+                        2. 파스쿠찌의 메인 에스프레소<br>
+                        기획 : 파스쿠찌만의 자랑 에스프레소를 설명하는 내용 추가<br>
+                        기대효과 : 사용자로하여금 파스쿠찌의 에스프레소에 특별함을 느끼게 함
+                    </span>
+                </div>
+            </div>
+            <div id="portfolio6">
+                <div id="p6_1">
+                    <img id="photo21" src="포폴/기억의미로웹.png" height="150px">
+                </div>
+                <div id="p6_2">
+                    <span class="bigText">기억의 미로(team project)</span>
+                    <span class="smallText"><br>
+                        게임 설명 : <br>
+                        제한 시간 안에 보이지 않는 지뢰를 피해 목적지에 도달하는 게임<br>
+                        캐릭터를 꾸밀 수 있도록 하여 사용자에게 흥미를 더함<br>
+                        제한시간을 둬 긴장감을 더함<br>
+                        랜덤 아이템을 배치해 사용자가 운적 요소를 느끼게 함<br>
+                        로컬스토리지를 이용하여 랭킹을 표시하였음.
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div id="Contact">
+            <div id="C_1">CONTACT</div>
+            <div id="contactInfo">
+                <img id="QR" src="포폴/QR.png" width=200px;>
+                <div>윤성찬.</div>
+                <div>010.5044.1108</div>
+                <div>dbsdbs17@gmail.com</div>
+            </div>
+        </div>
+        <div id="sectiont4">
+
+        </div>
+        <script>
+        
+            window.onload=function(){
+                document.getElementById("homeHello").style.top="120px";
+                document.getElementById("homeHello").style.opacity="1";
+                
+            }
+            setTimeout(helloBox, 1000);
+            setTimeout(writeClick, 2000);
+
+            function helloBox(){
+                document.getElementById("homeStart").style.height="60px";
+            }
+            function writeClick(){
+                document.getElementById("hereClick").style.opacity="1";
+            }
+            
+            document.getElementById("homeStart").addEventListener("click",quitHome);
+
+            function quitHome(){
+                window.scrollTo({top:0,left:0});
+                document.getElementById("home").style.display="none";
+            }
+
+
+
+            document.getElementById("menu1").addEventListener("click",openHome);
+            document.getElementById("menu2").addEventListener("click",scrollTo1);
+            document.getElementById("menu3").addEventListener("click",scrollTo2);
+            document.getElementById("menu4").addEventListener("click",scrollTo3);
+            document.getElementById("menu5").addEventListener("click",scrollTo4);
+
+            function openHome(){
+                window.scrollTo({top:0,left:0,behavior:"smooth"});
+                document.getElementById("home").style.display="flex";
+            }
+            function scrollTo1(){
+                window.scrollTo({top:0,left:0,behavior:"smooth"});
+            }
+            function scrollTo2(){
+                window.scrollTo({top:750,left:0,behavior:"smooth"});
+            }
+            function scrollTo3(){
+                window.scrollTo({top:1450,left:0,behavior:"smooth"});
+            }
+            function scrollTo4(){
+                window.scrollTo({top:2400,left:0,behavior:"smooth"});
+            }
+
+
+
+
+            document.getElementById("portfolio_left").addEventListener("click",moveLeft)
+            document.getElementById("portfolio_right").addEventListener("click",moveRight)
+            function moveLeft(){console.log(document.getElementById("link").display)
+                if(window.getComputedStyle(document.getElementById("portfolio1")).opacity=="1"){
+                    document.getElementById("portfolio1").style.opacity="0";
+                    document.getElementById("portfolio6").style.opacity="1";
+                    document.getElementById("link").style.display="flex";
+                    document.getElementById("link").href="기억의미로/기억의미로.html";
+                }
+                if(window.getComputedStyle(document.getElementById("portfolio2")).opacity=="1"){
+                    document.getElementById("portfolio2").style.opacity="0";
+                    document.getElementById("portfolio1").style.opacity="1";
+                    document.getElementById("link").style.display="none";
+                }
+                if(window.getComputedStyle(document.getElementById("portfolio3")).opacity=="1"){
+                    document.getElementById("portfolio3").style.opacity="0";
+                    document.getElementById("portfolio2").style.opacity="1";
+                    document.getElementById("link").style.display="none";
+                }
+                if(window.getComputedStyle(document.getElementById("portfolio4")).opacity=="1"){
+                    document.getElementById("portfolio4").style.opacity="0";
+                    document.getElementById("portfolio3").style.opacity="1";
+                    document.getElementById("link").style.display="none";
+                }
+                if(window.getComputedStyle(document.getElementById("portfolio5")).opacity=="1"){
+                    document.getElementById("portfolio5").style.opacity="0";
+                    document.getElementById("portfolio4").style.opacity="1";
+                    document.getElementById("link").style.display="flex";
+                    document.getElementById("link").href="domino/dominos.html";
+                }
+                if(window.getComputedStyle(document.getElementById("portfolio6")).opacity=="1"){
+                    document.getElementById("portfolio6").style.opacity="0";
+                    document.getElementById("portfolio5").style.opacity="1";
+                    document.getElementById("link").style.display="flex";
+                    document.getElementById("link").href="pascucci/CAFEPASCUCCI.html";
+                }
+
+            }
+            function moveRight(){
+                if(window.getComputedStyle(document.getElementById("portfolio1")).opacity=="1"){
+                    document.getElementById("portfolio1").style.opacity="0";
+                    document.getElementById("portfolio2").style.opacity="1";
+                    document.getElementById("link").style.display="none";
+                }
+                if(window.getComputedStyle(document.getElementById("portfolio2")).opacity=="1"){
+                    document.getElementById("portfolio2").style.opacity="0";
+                    document.getElementById("portfolio3").style.opacity="1";
+                    document.getElementById("link").style.display="none";
+                }
+                if(window.getComputedStyle(document.getElementById("portfolio3")).opacity=="1"){
+                    document.getElementById("portfolio3").style.opacity="0";
+                    document.getElementById("portfolio4").style.opacity="1";
+                    document.getElementById("link").style.display="flex";
+                    document.getElementById("link").href="domino/dominos.html";
+                }
+                if(window.getComputedStyle(document.getElementById("portfolio4")).opacity=="1"){
+                    document.getElementById("portfolio4").style.opacity="0";
+                    document.getElementById("portfolio5").style.opacity="1";
+                    document.getElementById("link").style.display="flex";
+                    document.getElementById("link").href="pascucci/CAFEPASCUCCI.html";
+                }
+                if(window.getComputedStyle(document.getElementById("portfolio5")).opacity=="1"){
+                    document.getElementById("portfolio5").style.opacity="0";
+                    document.getElementById("portfolio6").style.opacity="1";
+                    document.getElementById("link").style.display="flex";
+                    document.getElementById("link").href="기억의미로/기억의미로.html";
+                }
+                if(window.getComputedStyle(document.getElementById("portfolio6")).opacity=="1"){
+                    document.getElementById("portfolio6").style.opacity="0";
+                    document.getElementById("portfolio1").style.opacity="1";
+                    document.getElementById("link").style.display="none";
+                }
+            }
+
+
+
+
+            document.getElementById("healthB1").addEventListener("mouseover",healthB1hover);
+            document.getElementById("healthB1").addEventListener("mouseout",healthB1out);
+            document.getElementById("healthB2").addEventListener("mouseover",healthB2hover);
+            document.getElementById("healthB2").addEventListener("mouseout",healthB2out);
+            document.getElementById("healthB3").addEventListener("mouseover",healthB3hover);
+            document.getElementById("healthB3").addEventListener("mouseout",healthB3out);
+
+            function healthB1hover(){
+                document.getElementById("photo11").style.display="inline-block";
+            }
+            function healthB1out(){
+                document.getElementById("photo11").style.display="none";
+            }
+            function healthB2hover(){
+                document.getElementById("photo12").style.display="inline-block";
+            }
+            function healthB2out(){
+                document.getElementById("photo12").style.display="none";
+            }
+            function healthB3hover(){
+                document.getElementById("photo13").style.display="inline-block";
+            }
+            function healthB3out(){
+                document.getElementById("photo13").style.display="none";
+            }
+        </script>
+    </body>
+
+</html>
