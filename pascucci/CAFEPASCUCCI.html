@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CAFEPASCUCCI</title>
+
+<style>
+
+body{
+overflow-x:hidden
+}
+
+
+
+
+#logo{
+position:relative;
+left:-5px;
+margin:15px 0px 20px 0px;
+
+
+}
+
+
+
+.headMenu:link{color:black;}
+.headMenu:visited{color:black;}
+.headMenu:hover{color:#ffffff;}
+.headMenu:active{color:#ffffff;}
+.headMenu{text-decoration:none}
+
+#BG{
+position:fixed;
+top:0px;
+left:0px;
+z-index:1;
+width:1950px;
+height:100%;
+background:#110000;
+}
+
+#bgEmpty{
+height:138px;
+}
+
+#BGImg{
+
+}
+
+
+#header{
+z-index:6;
+position:fixed;
+display:flex;
+flex-direction:cloumn;
+top:0px;
+left:0px;
+width:100%;
+background:#ffffff;
+transition:all ease 500ms;
+}
+
+
+#navBar1{
+background:#1E0000;
+}
+
+#navBar1_1{
+width:1950px;
+display:flex;
+flex-direction: row;
+flex-wrap: nowrap;
+justify-content:space-around;
+
+background:#a10000;
+														
+}
+
+
+#navLogin{
+display:flex;
+flex-direction:row;
+justify-content:flex-end;
+flex-wrap:nowrap;
+margin:16px 65px 18px 185px;
+}
+
+#logo{
+margin:25px 180px 0px 45px;
+cursor:pointer;
+
+}
+
+#loginB{
+margin:20px 20px 0px 20px;
+cursor:pointer;
+}
+#joinB{
+margin:20px 20px 0px 20px;
+cursor:pointer;
+}
+#languageB{
+margin:20px 26px 0px 20px;
+cursor:pointer;
+}
+
+
+#navBar1_2{
+margin:0px 266px 0px 267px;
+padding:10px 0px 25px 0px;
+width:1366px;
+display:flex;
+flex-direction:row;
+justify-content:space-between;
+font-size:20px;
+color:#ffffff;
+}
+
+.headMenu{
+cursor:pointer;
+}
+
+.moreMenu{
+float:left;
+}
+
+.moreMenu123456{
+padding:0px 30px 0px 30px;
+top:137px;
+left:238px;
+color:#2C0000
+}
+
+#moreMenu1{
+display:none;
+position:absolute;
+background:#ffffff;
+width:1368px;
+height:200px;
+}
+#moreMenu1_1{
+display:inline-block;
+height:300px;
+height:200px;
+}
+#moreMenu1_2{
+display:inline-block;
+height:200px;
+width:260px;
+}
+#moreMenu1_3{
+display:inline-block;
+height:200px;
+width:170px;
+}
+#moreMenu1_4{
+display:inline-block;
+height:200px;
+width:175px;
+}
+#moreMenu1_5{
+display:inline-block;
+height:200px;
+width:174px;
+}
+#moreMenu1_6{
+display:inline-block;
+height:200px;
+width:220px;
+}
+
+
+#moreMenu2{
+display:none;
+position:absolute;
+background:#ffffff;
+width:1368px;
+height:200px;
+}
+#moreMenu2_1{
+display:inline-block;
+height:200px;
+width:250px;
+}
+#moreMenu2_2{
+display:inline-block;
+height:200px;
+width:260px;
+}
+#moreMenu2_3{
+display:inline-block;
+height:200px;
+width:170px;
+}
+#moreMenu2_4{
+display:inline-block;
+height:100%;
+width:175px;
+}
+#moreMenu2_5{
+display:inline-block;
+height:200px;
+width:174px;
+}
+#moreMenu2_6{
+display:inline-block;
+height:100%;
+width:220px;
+}
+
+#moreMenu3{
+display:none;
+position:absolute;
+background:#ffffff;
+width:1368px;
+height:200px;
+}
+#moreMenu3_1{
+display:inline-block;
+height:200px;
+width:250px;
+}
+#moreMenu3_2{
+display:inline-block;
+height:200px;
+width:260px;
+}
+#moreMenu3_3{
+display:inline-block;
+height:200px;
+width:170px;
+}
+#moreMenu3_4{
+display:inline-block;
+height:200px;
+width:175px;
+}
+#moreMenu3_5{
+display:inline-block;
+height:200px;
+width:174px;
+}
+#moreMenu3_6{
+display:inline-block;
+height:200px;
+width:220px;
+}
+
+#moreMenu4{
+display:none;
+position:absolute;
+background:#ffffff;
+width:1368px;
+height:200px;
+}
+#moreMenu4_1{
+display:inline-block;
+height:200px;
+width:250px;
+}
+#moreMenu4_2{
+display:inline-block;
+height:200px;
+width:260px;
+}
+#moreMenu4_3{
+display:inline-block;
+height:200px;
+width:170px;
+}
+#moreMenu4_4{
+display:inline-block;
+height:100%;
+width:175px;
+}
+#moreMenu4_5{
+display:inline-block;
+height:200px;
+width:174px;
+}
+#moreMenu4_6{
+display:inline-block;
+height:100%;
+width:220px;
+}
+
+#moreMenu5{
+display:none;
+position:absolute;
+background:#ffffff;
+width:1368px;
+height:200px;
+}
+#moreMenu5_1{
+display:inline-block;
+height:300px;
+width:250px;
+}
+#moreMenu5_2{
+display:inline-block;
+height:200px;
+width:260px;
+}
+#moreMenu5_3{
+display:inline-block;
+height:200px;
+width:170px;
+}
+#moreMenu5_4{
+display:inline-block;
+height:100%;
+width:175px;
+}
+#moreMenu5_5{
+display:inline-block;
+height:200px;
+width:174px;
+}
+#moreMenu5_6{
+display:inline-block;
+height:200px;
+width:220px;
+}
+
+#moreMenu6{
+display:none;
+position:absolute;
+background:#ffffff;
+width:1368px;
+height:200px;
+}
+#moreMenu6_1{
+display:inline-block;
+height:200px;
+width:250px;
+}
+#moreMenu6_2{
+display:inline-block;
+height:200px;
+width:260px;
+}
+#moreMenu6_3{
+display:inline-block;
+height:200px;
+width:170px;
+}
+#moreMenu6_4{
+display:inline-block;
+height:200px;
+width:175px;
+}
+#moreMenu6_5{
+display:inline-block;
+height:200px;
+width:174px;
+}
+#moreMenu6_6{
+display:inline-block;
+height:200px;
+width:220px;
+}
+
+
+
+
+body{
+margin:0px;
+padding:0px;
+}
+
+
+
+
+
+
+
+
+
+#mainDiv{
+float:left;
+width:1950px;
+}
+
+
+#mainEmpty{
+height:126px;
+}
+
+#news{
+position:relative;
+left:267px;
+z-index:1;
+width:1364px;
+height:680px;
+}
+
+
+#newsLeft{
+z-index:3;
+height:495px;
+width:200px;
+position:absolute;
+top:135px;
+left:-250px;
+text-align:right;
+line-height:495px;
+font-size:80px;
+color:#030303;
+cursor:pointer;
+}
+
+#newsRight{
+z-index:3;
+height:495px;
+width:200px;
+position:absolute;
+top:135px;
+right:-250px;
+text-align:left;
+line-height:495px;
+font-size:80px;
+color:#030303;
+cursor:pointer;
+}
+
+
+#news1{
+z-index:1;
+position:absolute;
+top:0px;
+left:0px;
+opacity:1;
+transition:all ease 500ms;
+}
+#news2{
+z-index:1;
+position:absolute;
+top:0px;
+left:100vw;
+opacity:1;
+transition:all ease 500ms;
+}
+#news3{
+z-index:1;
+position:absolute;top:0px;
+left:100vw;
+opacity:0;
+transition:all ease 500ms;
+}
+#news4{
+z-index:1;
+position:absolute;top:0px;
+left:-100vw;
+opacity:0;
+transition:all ease 500ms;
+}
+#news5{
+z-index:1;
+position:absolute;top:0px;
+left:-100vw;
+opacity:1;
+transition:all ease 500ms;
+}
+#news6{
+z-index:1;
+position:absolute;top:0px;
+left:-100vw;
+opacity:0;
+transition:all ease 500ms;
+}
+#news7{
+z-index:1;
+position:absolute;top:0px;
+left:-110vw;
+opacity:1;
+transition:all ease 500ms;
+}
+
+#drink{
+position:relative;
+z-index:2;
+left:267px;
+width:1368px;
+
+background:#ffffff;
+text-align:center;
+}
+
+#drink1{
+display:inline-block;
+text-align:center;
+width:20%
+}
+#drink2{
+display:inline-block;
+text-align:center;
+width:20%
+font-size:10px;
+}
+#drink3{
+display:inline-block;
+text-align:center;
+width:20%
+}
+#drink4{
+display:inline-block;
+text-align:center;
+width:20%
+}
+
+
+#coffee1{
+display:inline-block;
+text-align:center;
+width:20%
+}
+#coffee2{
+display:inline-block;
+text-align:center;
+width:20%
+}
+#coffee3{
+display:inline-block;
+text-align:center;
+width:20%
+}
+#coffee4{
+display:inline-block;
+text-align:center;
+width:20%
+}
+
+
+
+#mocaport{
+position:relative;
+z-index:2;
+left:267px;
+width:1368px;
+height:3026px;
+background:#ffffff;
+text-align:center;
+}
+
+#mocaport1{
+padding:50px;
+font-size:30px;
+}
+#mocaport1_1{
+margin:0px 0px 30px 0px;
+}
+#mocaport2_1{
+margin:30px
+}
+#mocaport3_1{
+margin:30px
+}
+#mocaport4_1{
+margin:30px
+}
+#mocaport5_1{
+margin:30px
+}
+#mocaport2{
+font-size:30px;
+}
+#mocaport3{
+font-size:30px;
+}
+#mocaport4{
+font-size:30px;
+}
+#mocaport5{
+font-size:30px;
+}
+
+footer{
+position:relative;
+z-index:2;
+left:267px;
+width:1368px;
+background:#ffffff;
+
+}
+
+#footerNum{
+font-size:30px;
+}
+
+#footLeft{
+margin:10px 0px 0px 390px;
+font-size:10px;
+}
+#footLeft1{
+margin:10px 0px 0px 20px;
+font-size:13px;
+}
+#footLeft2{
+margin:10px 0px 0px 20px;
+font-size:13px;
+}
+#footLeft3{
+margin:10px 0px 0px 20px;
+font-size:13px;
+}
+#footLeft4{
+margin:10px 0px 0px 20px;
+font-size:13px;
+}
+
+</style>
+</head>
+<body id="body">
+<header id="header">
+	<div id="navBar1">
+		<div id="navBar1_1">
+			<img id="logo" src="파스쿠찌로고_(2).png" height=40px;>
+			<div id="navLogin"><div id="loginB"><a>로그인</a></div><div id="joinB"><a>회원가입</a></div><div id="languageB"><a>KOR</a></div></div>
+		</div>
+		<div id="navBar1_2">
+			<div id="headMenu1" class="headMenu">
+				ESPRESSO BAR
+			</div>
+			<div id="headMenu2" class="headMenu">
+				CAFE PASCUCCI
+			</div>
+			<div id="headMenu3" class="headMenu">
+				MENU
+			</div>
+			<div id="headMenu4" class="headMenu">
+				NEWS
+			</div>
+			<div id="headMenu5" class="headMenu">
+				STORE
+			</div>
+			<div id="headMenu6" class="headMenu">
+				CUSTOMER
+			</div>
+			<div id="headMenu7" class="headMenu">
+				가맹사업안내
+			</div>
+
+
+			<div id="moreMenu1" class="moreMenu123456">
+				<div id="moreMenu1_1" class="moreMenu"><strong>ESPRESSO BAR</strong></div>
+				<div id="moreMenu1_2" class="moreMenu"><strong></strong></div>
+				<div id="moreMenu1_3" class="moreMenu"><strong></strong></div>
+				<div id="moreMenu1_4" class="moreMenu"><strong></strong></div>
+				<div id="moreMenu1_5" class="moreMenu"><strong></strong></div>
+				<div id="moreMenu1_6" class="moreMenu"><strong></strong></div>
+				<div id="moreMenu1_7" class="moreMenu"><strong></strong></div>
+				
+			</div>
+			<div id="moreMenu2" class="moreMenu123456">
+				<div id="moreMenu2_1" class="moreMenu"><strong>브랜드 소개</strong><br>전통과 전통의 만남<br>한국 파스쿠찌<br>이탈리아 파스쿠찌</div>
+				<div id="moreMenu2_2" class="moreMenu"><strong>커피&컬쳐</strong></div>
+				<div id="moreMenu2_3" class="moreMenu"><strong></strong></div>
+				<div id="moreMenu2_4" class="moreMenu"><strong></strong></div>
+				<div id="moreMenu2_5" class="moreMenu"><strong></strong></div>
+				<div id="moreMenu2_6" class="moreMenu"><strong></strong></div>
+				<div id="moreMenu2_7" class="moreMenu"><strong></strong></div>
+			</div>
+			<div id="moreMenu3" class="moreMenu123456">
+				<div id="moreMenu3_1" class="moreMenu"><strong>COFFEE</strong><br>Italian coffee<br>Coffee Variation(Hot)<br>Coffee Variation(Iced)<br>Cold Brew</div>
+				<div id="moreMenu3_2" class="moreMenu"><strong>Beverage</strong><br>Seasonal<br>Italian Granita<br>Tea<br>Fresh Juice<br>Others</div>
+				<div id="moreMenu3_3" class="moreMenu"><strong>Food</strong><br>Cake<br>Italian Deli<br>Bakery<br>Dessert<br>Italian Gelato</div>
+				<div id="moreMenu3_4" class="moreMenu"><strong>MD</strong><br>Bean<br>Tumbler<br>Mug<br>Coffee Tool<br>Tea<br>Others</div>
+				<div id="moreMenu3_5" class="moreMenu"><strong></strong></div>
+				<div id="moreMenu3_6" class="moreMenu"><strong></strong></div>
+				<div id="moreMenu3_7" class="moreMenu"><strong></strong></div>
+				
+				
+			</div>
+			<div id="moreMenu4" class="moreMenu123456">
+				<div id="moreMenu4_1" class="moreMenu"><strong>공지사항</strong></div>
+				<div id="moreMenu4_2" class="moreMenu"><strong>이벤트</strong></div>
+				<div id="moreMenu4_3" class="moreMenu"><strong>파스쿠찌 Talk</strong></div>
+				<div id="moreMenu4_4" class="moreMenu"><strong>홍보센터</strong><br>사회공헌<br>보도자료</div>
+				<div id="moreMenu4_5" class="moreMenu"><strong></strong></div>
+				<div id="moreMenu4_6" class="moreMenu"><strong></strong></div>
+				<div id="moreMenu4_7" class="moreMenu"><strong></strong></div>
+				
+			</div>
+			<div id="moreMenu5" class="moreMenu123456">
+				<div id="moreMenu5_1" class="moreMenu"><strong>매장안내</strong></div>
+				<div id="moreMenu5_2" class="moreMenu"><strong></strong></div>
+				<div id="moreMenu5_3" class="moreMenu"><strong></strong></div>
+				<div id="moreMenu5_4" class="moreMenu"><strong></strong></div>
+				<div id="moreMenu5_5" class="moreMenu"><strong></strong></div>
+				<div id="moreMenu5_6" class="moreMenu"><strong></strong></div>
+				<div id="moreMenu5_7" class="moreMenu"><strong></strong></div>
+				
+			</div>
+			<div id="moreMenu6" class="moreMenu123456">
+				<div id="moreMenu6_1" class="moreMenu"><strong>제휴안내</strong></div>
+				<div id="moreMenu6_2" class="moreMenu"><strong>자주하는 질문</strong></div>
+				<div id="moreMenu6_3" class="moreMenu"><strong>1:1 문의하기</strong></div>
+				<div id="moreMenu6_4" class="moreMenu"><strong></strong></div>
+				<div id="moreMenu6_5" class="moreMenu"><strong></strong></div>
+				<div id="moreMenu6_6" class="moreMenu"><strong></strong></div>
+				<div id="moreMenu6_7" class="moreMenu"><strong></strong></div>
+				
+			</div>
+
+		</div>
+	</div>
+	<div>
+		
+	</div>
+
+
+</header>
+
+<div id="BG"><div id="bgEmpty"></div><img id="BGImg" src="파스쿠찌배경202.png"></div>
+
+
+
+<div id="mainDiv">
+	<div id="mainEmpty"></div>
+	<div id="news">
+		<div id="newsLeft">&lt;</div>
+		<div id="newsRight">&gt;</div>
+		<div id="news1"><img id="news1Img" src="news1.png"></div>
+		<div id="news2"><img id="news2Img" src="news2.png"></div>
+		<div id="news3"><img id="news3Img" src="news3.png"></div>
+		<div id="news4"><img id="news4Img" src="news4.png"></div>
+		<div id="news5"><img id="news5Img" src="news5.png"></div>	
+	</div>
+	<div id="drink">
+		<div>
+			<img src="d1.jpg" width=20%>
+			<img src="d2.jpg" width=20%>
+			<img src="d3.jpg" width=20%>
+			<img src="d4.jpg" width=20%>
+			<div id="drink1">청포도 민트 빅 아이스티<br>Green Grape Mint Big Iced Tea</div>
+			<div id="drink2">청포도 민트 빅 아이스티<br>Green Tangerine Jasmine Big Iced Tea</div>
+			<div id="drink3">청포도 민트 빅 아이스티<br>Lychee Hibiscus Big Iced Tea</div>
+			<div id="drink4">청포도 민트 빅 아이스티<br>Peach Oolong Big Iced Tea</div>
+			<img src="c1.jpg" width=20%>
+			<img src="c2.jpg" width=20%>
+			<img src="c3.jpg" width=20%>
+			<img src="c4.jpg" width=20%>
+			<div id="coffee1">에스프레소<br>Espresso</div>
+			<div id="coffee2">에스프레소 도피오<br>Espresso Doppio</div>
+			<div id="coffee3">에스프레소 마키아또<br>Espresso</div>
+			<div id="coffee4">아포가또<br>Affogato</div>
+		</div>
+	</div>
+	<div id="mocaport">
+		<div id="mocaport1">
+			<div id="mocaport1_1">이탈리아 커피문화의 대표 파스쿠찌</div>
+			<div id="mocaport1_2"><img src="모카포트.png" width=700px></div>
+		</div>
+		<div id="mocaport2">
+			<div id="mocaport2_1">로브스타 종을 아라비카 종과 블렌딩해</div>
+			<div id="mocaport2_2"><img src="모카포트1.png" width=500px></div>
+		</div>
+
+
+		<div id="mocaport3">
+			<div id="mocaport3_1">에스프레소의 묵직한 바디와 깊은 쓴 맛을 냅니다.</div>
+			<div id="mocaport3_2"><img src="모카포트2.png" width=500px></div>
+		</div>
+		<div id="mocaport4">
+			<div id="mocaport4_1">아라비카 종의 산미와 풍부한 맛과 향에 로브스타의 구수하고 묵직한 바디감을</div>
+			<div id="mocaport4_2"><img src="모카포트3.png" width=500px></div>
+		</div>
+		<div id="mocaport5">
+			<div id="mocaport5_1">안정적인 추출과 황금빛 크레마</div>
+			<div id="mocaport5_2"><img src="에스프레소.jpg" width=500px></div>
+		</div>
+	</div>
+	<footer>
+		<div id="footTop">
+			<div id="footLeft">
+				<div id="footLeft1"><img src="파스쿠찌로고_(2).png" width="200px"> <span id="footerNum">1577-3082</span></div>
+				<div id="footLeft2">
+					<a>이용약관</a>
+					<a><strong>개인정보처리방침</strong></a>
+					<a>위치기반서비스</a>
+					<a>청소년보호방침</a>
+					<a>고객센터</a>
+					<a>인재채용</a>
+					<a>가맹점모집</a>
+					<a>단체주문</a>
+				</div>
+				
+				<div id="footLeft3">
+					경기도 성남시 중원구 사기막골로31번길 18 FAX.0505-073-0210 l 고객상담센터 080-731-2027
+					<br>사업자 등록번호: 129-81-07244 l 
+					<br>ALL RIGHTS RESERVED ⓒ 2016 THE PASCUCCI, PARIS CROISSANT CO., LTD.
+				</div>
+			</div>
+	
+			<div id="footRight">
+			</div>
+		</div>
+		<div id="footBottom">
+		</div>
+	
+	</footer>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+document.getElementById("headMenu1").addEventListener("mouseover",openMenu1)
+document.getElementById("headMenu2").addEventListener("mouseover",openMenu2)
+document.getElementById("headMenu3").addEventListener("mouseover",openMenu3)
+document.getElementById("headMenu4").addEventListener("mouseover",openMenu4)
+document.getElementById("headMenu5").addEventListener("mouseover",openMenu5)
+document.getElementById("headMenu6").addEventListener("mouseover",openMenu6)
+document.getElementById("headMenu7").addEventListener("mouseover",openMenu7)
+
+document.getElementById("navBar1_2").addEventListener("mouseout",closeMenu)
+document.getElementById("moreMenu1").addEventListener("mouseout",closeMenu)
+document.getElementById("moreMenu2").addEventListener("mouseout",closeMenu)
+document.getElementById("moreMenu3").addEventListener("mouseout",closeMenu)
+document.getElementById("moreMenu4").addEventListener("mouseout",closeMenu)
+document.getElementById("moreMenu5").addEventListener("mouseout",closeMenu)
+document.getElementById("moreMenu6").addEventListener("mouseout",closeMenu)
+
+function openMenu1(){
+	document.getElementById("moreMenu1").style.display="inline-block";
+	document.getElementById("moreMenu2").style.display="none";
+	document.getElementById("moreMenu3").style.display="none";
+	document.getElementById("moreMenu4").style.display="none";
+	document.getElementById("moreMenu5").style.display="none";
+	document.getElementById("moreMenu6").style.display="none";
+
+}
+
+function openMenu2(){
+	document.getElementById("moreMenu1").style.display="none";
+	document.getElementById("moreMenu2").style.display="inline-block";
+	document.getElementById("moreMenu3").style.display="none";
+	document.getElementById("moreMenu4").style.display="none";
+	document.getElementById("moreMenu5").style.display="none";
+	document.getElementById("moreMenu6").style.display="none";
+}
+
+function openMenu3(){
+	document.getElementById("moreMenu1").style.display="none";
+	document.getElementById("moreMenu2").style.display="none";
+	document.getElementById("moreMenu3").style.display="inline-block";
+	document.getElementById("moreMenu4").style.display="none";
+	document.getElementById("moreMenu5").style.display="none";
+	document.getElementById("moreMenu6").style.display="none";
+}
+
+function openMenu4(){
+	document.getElementById("moreMenu1").style.display="none";
+	document.getElementById("moreMenu2").style.display="none";
+	document.getElementById("moreMenu3").style.display="none";
+	document.getElementById("moreMenu4").style.display="inline-block";
+	document.getElementById("moreMenu5").style.display="none";
+	document.getElementById("moreMenu6").style.display="none";
+}
+
+function openMenu5(){
+	document.getElementById("moreMenu1").style.display="none";
+	document.getElementById("moreMenu2").style.display="none";
+	document.getElementById("moreMenu3").style.display="none";
+	document.getElementById("moreMenu4").style.display="none";
+	document.getElementById("moreMenu5").style.display="inline-block";
+	document.getElementById("moreMenu6").style.display="none";
+}
+
+function openMenu6(event){
+	document.getElementById("moreMenu1").style.display="none";
+	document.getElementById("moreMenu2").style.display="none";
+	document.getElementById("moreMenu3").style.display="none";
+	document.getElementById("moreMenu4").style.display="none";
+	document.getElementById("moreMenu5").style.display="none";
+	document.getElementById("moreMenu6").style.display="inline-block";
+}
+
+function openMenu7(event){
+}
+
+
+function closeMenu(event){
+	if(event.clientX<267){
+		document.getElementById("moreMenu1").style.display="none";
+		document.getElementById("moreMenu2").style.display="none";
+		document.getElementById("moreMenu3").style.display="none";
+		document.getElementById("moreMenu4").style.display="none";
+		document.getElementById("moreMenu5").style.display="none";
+		document.getElementById("moreMenu6").style.display="none";
+	}
+	else if(event.clientX>1632){
+		document.getElementById("moreMenu1").style.display="none";
+		document.getElementById("moreMenu2").style.display="none";
+		document.getElementById("moreMenu3").style.display="none";
+		document.getElementById("moreMenu4").style.display="none";
+		document.getElementById("moreMenu5").style.display="none";
+		document.getElementById("moreMenu6").style.display="none";
+	}
+	else if(event.clientY<75){
+		document.getElementById("moreMenu1").style.display="none";
+		document.getElementById("moreMenu2").style.display="none";
+		document.getElementById("moreMenu3").style.display="none";
+		document.getElementById("moreMenu4").style.display="none";
+		document.getElementById("moreMenu5").style.display="none";
+		document.getElementById("moreMenu6").style.display="none";
+	}
+	else if(event.clientY>330){
+		document.getElementById("moreMenu1").style.display="none";
+		document.getElementById("moreMenu2").style.display="none";
+		document.getElementById("moreMenu3").style.display="none";
+		document.getElementById("moreMenu4").style.display="none";
+		document.getElementById("moreMenu5").style.display="none";
+		document.getElementById("moreMenu6").style.display="none";
+	}
+}
+
+
+
+/*
+
+       //마우스 좌표값 가져오기 ;;
+function mousemove(event){
+    console.log("pageX: ",event.pageX, 
+    "pageY: ", event.pageY, 
+    "clientX: ", event.clientX, 
+    "clientY:", event.clientY)
+}
+window.addEventListener('mousemove', mousemove);
+
+*/
+
+
+
+
+
+
+document.getElementById("newsRight").addEventListener("click",rightNews)
+document.getElementById("newsLeft").addEventListener("click",leftNews)
+
+
+function rightNews(){console.log(document.getElementById("news1").style.left);
+	if(window.getComputedStyle(document.getElementById("news1")).left=="0px"){
+		document.getElementById("news5").style.opacity=0;
+		document.getElementById("news1").style.left="-100vw";
+		document.getElementById("news2").style.left="0px";
+		document.getElementById("news3").style.opacity=1;
+		document.getElementById("news4").style.left="100vw";
+	}	
+	if(window.getComputedStyle(document.getElementById("news2")).left=="0px"){
+		document.getElementById("news1").style.opacity=0;
+		document.getElementById("news2").style.left="-100vw";
+		document.getElementById("news3").style.left="0px";
+		document.getElementById("news4").style.opacity=1;
+		document.getElementById("news5").style.left="100vw";
+	}
+	if(window.getComputedStyle(document.getElementById("news3")).left=="0px"){
+		document.getElementById("news2").style.opacity=0;
+		document.getElementById("news3").style.left="-100vw";
+		document.getElementById("news4").style.left="0px";
+		document.getElementById("news5").style.opacity=1;
+		document.getElementById("news1").style.left="100vw";
+	}
+	if(window.getComputedStyle(document.getElementById("news4")).left=="0px"){
+		document.getElementById("news3").style.opacity=0;
+		document.getElementById("news4").style.left="-100vw";
+		document.getElementById("news5").style.left="0px";
+		document.getElementById("news1").style.opacity=1;
+		document.getElementById("news2").style.left="100vw";
+	}
+	if(window.getComputedStyle(document.getElementById("news5")).left=="0px"){
+		document.getElementById("news4").style.opacity=0;
+		document.getElementById("news5").style.left="-100vw";
+		document.getElementById("news1").style.left="0px";
+		document.getElementById("news2").style.opacity=1;
+		document.getElementById("news3").style.left="100vw";
+	}
+	
+
+}
+
+function leftNews(){console.log(document.getElementById("news1").style.left);
+	if(window.getComputedStyle(document.getElementById("news1")).left=="0px"){
+		document.getElementById("news2").style.opacity=0;
+		document.getElementById("news1").style.left="100vw";
+		document.getElementById("news5").style.left="0px";
+		document.getElementById("news4").style.opacity=1;
+		document.getElementById("news3").style.left="-100vw";
+	}
+	else if(window.getComputedStyle(document.getElementById("news2")).left=="0px"){
+		document.getElementById("news3").style.opacity=0;
+		document.getElementById("news2").style.left="100vw";
+		document.getElementById("news1").style.left="0px";
+		document.getElementById("news5").style.opacity=1;
+		document.getElementById("news4").style.left="-100vw";
+	}
+	else if(window.getComputedStyle(document.getElementById("news3")).left=="0px"){
+		document.getElementById("news4").style.opacity=0;
+		document.getElementById("news3").style.left="100vw";
+		document.getElementById("news2").style.left="0px";
+		document.getElementById("news1").style.opacity=1;
+		document.getElementById("news5").style.left="-100vw";
+	}
+	else if(window.getComputedStyle(document.getElementById("news4")).left=="0px"){
+		document.getElementById("news5").style.opacity=0;
+		document.getElementById("news4").style.left="100vw";
+		document.getElementById("news3").style.left="0px";
+		document.getElementById("news2").style.opacity=1;
+		document.getElementById("news1").style.left="-100vw";
+	}
+	else if(window.getComputedStyle(document.getElementById("news5")).left=="0px"){
+		document.getElementById("news1").style.opacity=0;
+		document.getElementById("news5").style.left="100vw";
+		document.getElementById("news4").style.left="0px";
+		document.getElementById("news3").style.opacity=1;
+		document.getElementById("news2").style.left="-100vw";
+	}
+}
+
+
+
+
+
+
+document.getElementById("navBar1_2").addEventListener("mouseover",moreMenuOpen);
+document.getElementById("navBar1_2").addEventListener("mouseout",moreMenuClose);
+function moreMenuOpen(){console.log('진입');
+	console.log(window.getComputedStyle(document.getElementById("moreStart")).top)
+	
+	if(window.getComputedStyle(document.getElementById("moreStart")).top=="-600px"){console.log('-600확인');
+		document.getElementById("moreStart").style.top="0px";
+	}	
+
+	else{console.log(moreStart.style.top)}
+}
+function moreMenuClose(){
+	if(window.getComputedStyle(document.getElementById("moreStart")).top=="0px"){console.log('0확인');
+		document.getElementById("moreStart").style.top="-600px";
+	}
+	else{console.log(moreStart.style.top)}
+}
+
+
+	var a=0;
+	var b=1;
+	var c=2;
+	var d=3;
+serviceImgSlides();
+
+function serviceImgSlides(){
+	var x=[a,b,c,d];
+	var serviceImg=document.getElementsByClassName("serviceImg");
+	serviceImg[a].style.opacity=1;
+	serviceImg[b].style.opacity=0;
+	serviceImg[c].style.opacity=0;
+	serviceImg[d].style.opacity=0;
+	a++;
+	b++;
+	c++;
+	d++;
+
+	if(a==4){
+	a=0;
+	}
+	if(b==4){
+	b=0;
+	}
+	if(c==4){
+	c=0;
+	}
+	if(d==4){
+	d=0;
+	}	
+	setTimeout(serviceImgSlides, 2000);
+}
+
+/*
+primiumImg
+primium1
+primium2
+primium3
+primium4
+primium5
+primium6
+*/
+	var e=0;
+	var f=1;
+	var g=2;
+	var h=3;
+	var i=4;
+	var j=5;
+	var k=6;
+primiumImgSlides();
+
+function primiumImgSlides(){
+	var z=[e,f,g,h,i,j];
+	var primiumImg=document.getElementsByClassName("primiumImg");
+	primiumImg[e].style.opacity=1;
+	primiumImg[f].style.opacity=0;
+	primiumImg[g].style.opacity=0;
+	primiumImg[h].style.opacity=0;
+	primiumImg[i].style.opacity=0;
+	primiumImg[j].style.opacity=0;
+
+	e++;
+	f++;
+	g++;
+	h++;
+	i++;
+	j++;
+
+
+	if(e==6){
+	e=0;
+	}
+	if(f==6){
+	f=0;
+	}
+	if(g==6){
+	g=0;
+	}
+	if(h==6){
+	h=0;
+	}
+	if(i==6){
+	i=0;
+	}
+	if(j==6){
+	j=0;
+	}	
+
+	setTimeout(primiumImgSlides, 3000);
+}
+
+
+</script>
+
+
+
+</body>
+</html>
