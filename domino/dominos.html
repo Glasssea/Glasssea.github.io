@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Domino's</title>
+
+<style>
+
+body{
+overflow-x:hidden
+}
+
+
+
+#noHow{
+z-index:5;
+position:fixed;
+display:flex;
+top:185px;
+left:82.5%;
+animation-name:doongSil;
+animation-duration:1s;
+animation-iteration-count: infinite;
+cursor:pointer;
+}
+
+
+@keyframes doongSil{
+	0%{
+		top:185px;
+	}
+	50%{
+		top:197px;
+	}
+	100%{
+		top:185px;
+	}
+}
+#logo{
+margin:15px 0px 20px 0px;
+
+}
+
+
+#noHowX{
+position:absolute;
+top:0px;
+right:0px;
+font-size:40px;
+}
+
+.headMenu:link{color:black;}
+.headMenu:visited{color:black;}
+.headMenu:hover{color:black;}
+.headMenu:active{color:black;}
+.headMenu{text-decoration:none}
+
+#header{
+z-index:6;
+position:fixed;
+display:flex;
+flex-direction:cloumn;
+top:0px;
+left:0px;
+width:100%;
+background:#ffffff;
+transition:all ease 500ms;
+}
+
+
+
+#navBar1_1{
+width:1950px;
+display:flex;
+flex-direction: row;
+flex-wrap: nowrap;
+justify-content:space-around;
+}
+
+
+#navLogin{
+display:flex;
+flex-direction:row;
+justify-content:flex-end;
+flex-wrap:nowrap;
+margin:16px 65px 18px 185px;
+}
+
+#logo{
+margin:25px 180px 0px 45px;
+cursor:pointer;
+}
+
+#loginB{
+margin:20px 20px 0px 20px;
+cursor:pointer;
+}
+#joinB{
+margin:20px 20px 0px 20px;
+cursor:pointer;
+}
+#languageB{
+margin:20px 20px 0px 20px;
+cursor:pointer;
+}
+
+
+#navBar1_2{
+background:#ffffff;
+font-size:20px;
+}
+
+.headMenu{
+display:inline-block;
+width:201px;
+height:60px;
+line-height:60px;
+text-align:center;
+cursor:pointer;
+}
+
+body{
+margin:0px;
+padding:0px;
+background:#f0f0f0;
+}
+
+#headMenu1{
+margin:0px 0px 0px 235px;
+}
+
+#headMenu2{
+}
+
+#headMenu3{
+}
+
+#headMenu4{
+}
+
+#headMenu5{
+}
+
+#headMenu6{
+}
+
+#headMenu7{
+}
+
+#more{
+z-index:5;
+top:135px;
+position:fixed;
+background:#c0c0c0;
+width:100%;
+transition:all ease 500ms;
+}
+
+#moreStart{
+position:absolute;
+width:100%;
+height:600px;
+background:#f0f0f0;
+border:solid 1px;
+border-color:#d0d0d0;
+transition:all ease 500ms;
+top:-600px;
+}
+
+#moreMenu{
+display:flex;
+flex-direction:column;
+justify-content:center;
+position:absolute;
+top:0px;
+left:300px;
+width:200px;
+font-size:25px;
+line-height:150px;
+}
+
+#moreMenu1234{
+display:flex;
+flex-direction:column;
+position:absolute;
+top:0px;
+left:550px;
+width:1075px;
+height:600px;
+
+border-left:solid 1px;
+border-color:#d0d0d0;
+}
+
+.moreMenu1234{
+width:225px;
+}
+
+#moreMenu1{
+display:flex;
+flex-direction:row;
+justify-content:flex-start;
+height:150px;
+font-size:20px;
+line-height:150px;
+margin:0px 0px 0px 100px;
+
+}
+
+#moreMenu2{
+display:flex;
+flex-direction:row;
+justify-content:flex-start;
+height:150px;
+font-size:20px;
+line-height:150px;
+margin:0px 0px 0px 100px;
+
+}
+
+#moreMenu3{
+display:flex;
+flex-direction:row;
+justify-content:flex-start;
+height:150px;
+font-size:20px;
+line-height:150px;
+margin:0px 0px 0px 100px;
+}
+
+#moreMenu4{
+display:flex;
+flex-direction:row;
+justify-content:flex-start;
+height:150px;
+font-size:20px;
+line-height:150px;
+margin:0px 0px 0px 100px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#mainDiv{
+
+float:left;
+}
+
+#news{
+z-index:1;
+width:1920px;
+height:621px;
+}
+
+
+#newsLeft{
+z-index:3;
+height:495px;
+width:200px;
+position:absolute;
+top:135px;
+left:0px;
+text-align:right;
+line-height:495px;
+font-size:80px;
+color:#f0f0f0;
+cursor:pointer;
+}
+
+#newsRight{
+z-index:3;
+height:495px;
+width:200px;
+position:absolute;
+top:135px;
+right:0px;
+text-align:left;
+line-height:495px;
+font-size:80px;
+color:#f0f0f0;
+cursor:pointer;
+}
+
+
+#news1{
+z-index:1;
+position:absolute;
+top:0px;
+left:0px;
+opacity:1;
+transition:all ease 500ms;
+}
+#news2{
+z-index:1;
+position:absolute;
+top:0px;
+left:100vw;
+opacity:1;
+transition:all ease 500ms;
+}
+#news3{
+z-index:1;
+position:absolute;top:0px;
+left:100vw;
+opacity:0;
+transition:all ease 500ms;
+}
+#news4{
+z-index:1;
+position:absolute;top:0px;
+left:100vw;
+opacity:0;
+transition:all ease 500ms;
+}
+#news5{
+z-index:1;
+position:absolute;top:0px;
+left:100vw;
+opacity:0;
+transition:all ease 500ms;
+}
+#news6{
+z-index:1;
+position:absolute;top:0px;
+left:-100vw;
+opacity:0;
+transition:all ease 500ms;
+}
+#news7{
+z-index:1;
+position:absolute;top:0px;
+left:-110vw;
+opacity:1;
+transition:all ease 500ms;
+}
+
+
+
+#service{
+width:406px;
+height:502px;
+background:#ffffff;
+border:solid 1px;
+border-color:#ffffff;
+line-height:0px;
+}
+
+.serviceImg{
+transition:opacity 1000ms;
+}
+
+#img1{
+position:absolute;
+opacity:1;
+}
+
+#img2{
+position:absolute;
+opacity:0;
+}
+
+#img3{
+position:absolute;
+opacity:0;
+}
+
+#img4{
+position:absolute;
+opacity:0;
+}
+
+
+#order{
+width:100%;
+height:504px;
+display:flex;
+flex-direction:row;
+justify-content:flex-start;
+background:#f0f0f0;
+border-bottom:solid 2px;
+border-color:#c0c0c0;
+}
+
+#red{
+height:504px;
+display:flex;
+flex-direction:column;;
+}
+
+#red1{
+background:#D40047;
+width:250px;
+height:250px;
+border:solid 1px;
+border-color:#ffffff;
+color:#ffffff;
+text-align:center;
+}
+#red2{
+background:#D40047;
+width:250px;
+height:250px;
+border:solid 1px;
+border-color:#ffffff;
+color:#ffffff;
+text-align:center;
+}
+#blue{
+background:#2175D5;
+width:250px;
+height:502px;
+border:solid 1px;
+border-color:#ffffff;
+color:#ffffff;
+text-align:center;
+}
+
+.Quick{
+font-size:50px;
+line-height:175px;
+}
+
+.QuickOrder{
+font-size:20px;
+}
+
+#QuickImg{
+margin:70px 0px 0px 0px;
+}
+
+#primiumPizza{
+width:502px;
+height:502px;
+border-top:solid 1px;
+border-bottom:solid 1px;
+border-color:#ffffff;
+}
+
+.primiumImg{
+transition:opacity 1500ms;
+}
+
+#primium1{
+position:absolute;
+opacity:1;
+}
+#primium2{
+position:absolute;
+opacity:0;
+}
+#primium3{
+position:absolute;
+opacity:0;
+}
+#primium4{
+position:absolute;
+opacity:0;
+}
+#primium5{
+position:absolute;
+opacity:0;
+}
+#primium6{
+position:absolute;
+opacity:0;
+}
+
+#mania{
+height:502px;
+width:490px;
+border-top:solid 1px;
+border-left:solid 1px;
+border-bottom:solid 1px;
+border-color:#ffffff;
+line-height:0px;
+}
+
+
+.mania{
+display:inline-block;
+float:left;
+}
+
+
+footer{
+background:#ffffff;
+}
+
+#footerNum{
+font-size:30px;
+}
+
+#footLeft{
+margin:10px 0px 0px 390px;
+font-size:10px;
+}
+#footLeft1{
+margin:10px 0px 0px 20px;
+font-size:13px;
+}
+#footLeft2{
+margin:10px 0px 0px 20px;
+font-size:13px;
+}
+#footLeft3{
+margin:10px 0px 0px 20px;
+font-size:13px;
+}
+#footLeft4{
+margin:10px 0px 0px 20px;
+font-size:13px;
+}
+
+</style>
+</head>
+<body>
+<header id="header">
+	<div id="navBar1">
+		<div id="navBar1_1">
+			<img id="logo" src="도미노피자로고.png" height=40px;>
+			<div id="navLogin"><div id="loginB"><a>로그인</a></div><div id="joinB"><a>회원가입</a></div><div id="languageB"><a>KOR</a></div></div>
+		</div>
+		<div id="navBar1_2">
+			<div id="headMenu1" class="headMenu">메뉴</div>
+			<div id="headMenu2" class="headMenu">e-쿠폰</div>
+			<div id="headMenu3" class="headMenu">상품권 선물</div>
+			<div id="headMenu4" class="headMenu">이벤트&#183;제휴</div>
+			<div id="headMenu5" class="headMenu">매장검색</div>
+			<div id="headMenu6" class="headMenu">가맹점모집</div>
+			<div id="headMenu7" class="headMenu">더보기</div>
+		</div>
+	</div>
+</header>
+
+<div id="noHow"><img src="노하우.png"><a id="noHowX">&times;</a></div>
+
+<div id="more">
+	<div id="moreStart">
+		<div id="moreMenu"><div>도미노 서비스</div><div>고객센터</div><div>회사소개</div><div>공지사항</div></div>
+		<div id="moreMenu1234">
+			<div id="moreMenu1"><div class="moreMenu1234">매니아 혜택</div><div class="moreMenu1234">도미노 모멘트</div><div class="moreMenu1234">단체주문 서비스</div><div class="moreMenu1234">퀵오더</div></div>
+			<div id="moreMenu2"><div class="moreMenu1234">자주하는 질문</div><div class="moreMenu1234">문의하기</div></div>
+			<div id="moreMenu3"><div class="moreMenu1234">한국도미노피자</div><div class="moreMenu1234">광고갤러리</div><div class="moreMenu1234">사회공헌활동</div><div class="moreMenu1234">인재채용</div></div>
+			<div id="moreMenu4"><div class="moreMenu1234">도미노뉴스</div><div>보도자료</div></div>
+		</div>
+	</div>
+	<div id="dou"></div>
+</div>
+
+
+
+
+
+<div id="empty"></div>
+
+<div id="mainDiv">
+	<div id="news">
+		<div id="newsLeft">&lt;</div>
+		<div id="newsRight">&gt;</div>
+		<div id="news1"><img id="news1Img" src="photo1.png"></div>
+		<div id="news2"><img id="news2Img" src="photo2.png"></div>
+		<div id="news3"><img id="news3Img" src="photo3.png"></div>
+		<div id="news4"><img id="news4Img" src="photo4.png"></div>
+		<div id="news5"><img id="news5Img" src="photo5.png"></div>
+		<div id="news6"><img id="news6Img" src="photo6.png"></div>
+		<div id="news7"><img id="news7Img" src="photo7.png"></div>		
+	</div>
+	<div id="order">
+		<div id="service">
+			<img class="serviceImg" id="img1" src="img1.jpg" height=502px;>
+			<img class="serviceImg" id="img2" src="img2.jpg" height=502px;>
+			<img class="serviceImg" id="img3" src="img3.jpg" height=502px;>
+			<img class="serviceImg" id="img4" src="img4.jpg" height=502px;>
+		</div>
+		<div id="blue">
+			<span class="Quick">퀵 오더</span>
+			<span class="QuickOrder"><br>자주 이용하는 메뉴를<br> 더 빠르게 주문해보세요!</span>
+			<img id="QuickImg" src="order.png" width=150px;>
+		</div>
+		
+		<div id="red">
+			<div id="red1"><span class="Quick">배달 주문</span><span class="QuickOrder"><br>등급별 최대 30%</span></div>
+			<div id="red2"><span class="Quick">포장 주문</span><span class="QuickOrder"><br>등급별 최대 40%</span></div>
+		</div>
+		<div id="primiumPizza">
+			<img id="primium1" class="primiumImg" src="마스터트리플코스.jpg" height=502px>
+			<img id="primium2" class="primiumImg" src="블랙앵거스스테이크.jpg" height=502px>
+			<img id="primium3" class="primiumImg" src="블랙타이거슈림프.jpg" height=502px>
+			<img id="primium4" class="primiumImg" src="블록버스터4.jpg" height=502px>
+			<img id="primium5" class="primiumImg" src="파이브씨푸드망고링.jpg" height=502px>
+			<img id="primium6" class="primiumImg" src="베스트콰트로.jpg" height=502px>
+		</div>
+		<div id="mania">
+			<div>
+				<img class="mania" src="mania1.png" width=242px height=252px>
+				<img class="mania" src="mania2.gif" width=242px height=252px>
+				<img class="mania" src="mania3.png" width=242px height=252px>
+				<img class="mania" src="mania4.png" width=242px height=252px>
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer>
+	<div id="footTop">
+		<div id="footLeft">
+			<div id="footLeft1"><img src="도미노피자로고.png" width="200px"> <span id="footerNum">1577-3082</span></div>
+			<div id="footLeft2">
+				<a>이용약관</a>
+				<a><strong>개인정보처리방침</strong></a>
+				<a>위치기반서비스</a>
+				<a>청소년보호방침</a>
+				<a>고객센터</a>
+				<a>인재채용</a>
+				<a>가맹점모집</a>
+				<a>단체주문</a>
+			</div>
+			
+			<div id="footLeft3">
+				06223 서울특별시 강남구 역삼로25길 35(역삼동, 정오큐브타워) 청오디피케이(주) l 대표이사 : 오광현, 김영훈
+				<br>사업자 등록번호: 220-81-03371 l 통신판매업신고 : 강남 5064호 l 개인정보 보호책임자 : 이명윤
+				<br>문의 : webmaster@dominos.co.kr
+				<br>Copyrightⓒ Domino's Pizza. All rights reserved.
+			</div>
+			<div id="footLeft4">정오디피케이(주)의 사전 서면동의 없이 도미노피자 사이트(PC,모바일, 앱)의 일체의 정보, 콘텐츠 및 UI등을 상업적 목적으로 전재, 전송, 스크래핑 등 무단 사용할 수 없습니다.</div>
+		</div>
+
+		<div id="footRight">
+		</div>
+	</div>
+	<div id="footBottom">
+	</div>
+
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+document.getElementById("noHowX").addEventListener("click",QuitNoHow);
+
+function QuitNoHow(){
+document.getElementById("noHow").style.display="none";
+}
+
+window.onscroll=function(){
+	if(scrollY==0){
+		document.getElementById("header").style.top="0px";
+		document.getElementById("more").style.top="135px";
+	}
+	else if(scrollY>=100){
+		document.getElementById("header").style.top="-75px";
+		document.getElementById("more").style.top="60px";
+	}
+}
+
+
+document.getElementById("newsRight").addEventListener("click",rightNews)
+document.getElementById("newsLeft").addEventListener("click",leftNews)
+
+
+function rightNews(){console.log(document.getElementById("news1").style.left);
+	if(window.getComputedStyle(document.getElementById("news1")).left=="0px"){
+		document.getElementById("news7").style.opacity=0;
+		document.getElementById("news1").style.left="-100vw";
+		document.getElementById("news2").style.left="0px";
+		document.getElementById("news3").style.opacity=1;
+		document.getElementById("news4").style.left="100vw";
+	}	
+	if(window.getComputedStyle(document.getElementById("news2")).left=="0px"){
+		document.getElementById("news1").style.opacity=0;
+		document.getElementById("news2").style.left="-100vw";
+		document.getElementById("news3").style.left="0px";
+		document.getElementById("news4").style.opacity=1;
+		document.getElementById("news5").style.left="100vw";
+	}
+	if(window.getComputedStyle(document.getElementById("news3")).left=="0px"){
+		document.getElementById("news2").style.opacity=0;
+		document.getElementById("news3").style.left="-100vw";
+		document.getElementById("news4").style.left="0px";
+		document.getElementById("news5").style.opacity=1;
+		document.getElementById("news6").style.left="100vw";
+	}
+	if(window.getComputedStyle(document.getElementById("news4")).left=="0px"){
+		document.getElementById("news3").style.opacity=0;
+		document.getElementById("news4").style.left="-100vw";
+		document.getElementById("news5").style.left="0px";
+		document.getElementById("news6").style.opacity=1;
+		document.getElementById("news7").style.left="100vw";
+	}
+	if(window.getComputedStyle(document.getElementById("news5")).left=="0px"){
+		document.getElementById("news4").style.opacity=0;
+		document.getElementById("news5").style.left="-100vw";
+		document.getElementById("news6").style.left="0px";
+		document.getElementById("news7").style.opacity=1;
+		document.getElementById("news1").style.left="100vw";
+	}
+	if(window.getComputedStyle(document.getElementById("news6")).left=="0px"){
+		document.getElementById("news5").style.opacity=0;
+		document.getElementById("news6").style.left="-100vw";
+		document.getElementById("news7").style.left="0px";
+		document.getElementById("news1").style.opacity=1;
+		document.getElementById("news2").style.left="100vw";
+	}
+	if(window.getComputedStyle(document.getElementById("news7")).left=="0px"){
+		document.getElementById("news6").style.opacity=0;
+		document.getElementById("news7").style.left="-100vw";
+		document.getElementById("news1").style.left="0px";
+		document.getElementById("news2").style.opacity=1;
+		document.getElementById("news3").style.left="100vw";
+	}
+
+}
+
+function leftNews(){console.log(document.getElementById("news1").style.left);
+	if(window.getComputedStyle(document.getElementById("news1")).left=="0px"){
+		document.getElementById("news2").style.opacity=0;
+		document.getElementById("news1").style.left="100vw";
+		document.getElementById("news7").style.left="0px";
+		document.getElementById("news6").style.opacity=1;
+		document.getElementById("news5").style.left="-100vw";
+	}
+	else if(window.getComputedStyle(document.getElementById("news2")).left=="0px"){
+		document.getElementById("news3").style.opacity=0;
+		document.getElementById("news2").style.left="100vw";
+		document.getElementById("news1").style.left="0px";
+		document.getElementById("news7").style.opacity=1;
+		document.getElementById("news6").style.left="-100vw";
+	}
+	else if(window.getComputedStyle(document.getElementById("news3")).left=="0px"){
+		document.getElementById("news4").style.opacity=0;
+		document.getElementById("news3").style.left="100vw";
+		document.getElementById("news2").style.left="0px";
+		document.getElementById("news1").style.opacity=1;
+		document.getElementById("news7").style.left="-100vw";
+	}
+	else if(window.getComputedStyle(document.getElementById("news4")).left=="0px"){
+		document.getElementById("news5").style.opacity=0;
+		document.getElementById("news4").style.left="100vw";
+		document.getElementById("news3").style.left="0px";
+		document.getElementById("news2").style.opacity=1;
+		document.getElementById("news1").style.left="-100vw";
+	}
+	else if(window.getComputedStyle(document.getElementById("news5")).left=="0px"){
+		document.getElementById("news6").style.opacity=0;
+		document.getElementById("news5").style.left="100vw";
+		document.getElementById("news4").style.left="0px";
+		document.getElementById("news3").style.opacity=1;
+		document.getElementById("news2").style.left="-100vw";
+	}
+	else if(window.getComputedStyle(document.getElementById("news6")).left=="0px"){
+		document.getElementById("news7").style.opacity=0;
+		document.getElementById("news6").style.left="100vw";
+		document.getElementById("news5").style.left="0px";
+		document.getElementById("news4").style.opacity=1;
+		document.getElementById("news3").style.left="-100vw";
+	}
+	else if(window.getComputedStyle(document.getElementById("news7")).left=="0px"){
+		document.getElementById("news1").style.opacity=0;
+		document.getElementById("news7").style.left="100vw";
+		document.getElementById("news6").style.left="0px";
+		document.getElementById("news5").style.opacity=1;
+		document.getElementById("news4").style.left="-100vw";
+	}
+
+}
+
+
+
+
+
+
+document.getElementById("headMenu7").addEventListener("click",moreMenuOpen);
+
+function moreMenuOpen(){console.log('진입');
+	console.log(window.getComputedStyle(document.getElementById("moreStart")).top)
+	
+	if(window.getComputedStyle(document.getElementById("moreStart")).top=="-600px"){console.log('-600확인');
+		document.getElementById("moreStart").style.top="0px";
+	}	
+	else if(window.getComputedStyle(document.getElementById("moreStart")).top=="0px"){console.log('0확인');
+		document.getElementById("moreStart").style.top="-600px";
+	}
+	else{console.log(moreStart.style.top)}
+}
+
+	var a=0;
+	var b=1;
+	var c=2;
+	var d=3;
+serviceImgSlides();
+
+function serviceImgSlides(){
+	var x=[a,b,c,d];
+	var serviceImg=document.getElementsByClassName("serviceImg");
+	serviceImg[a].style.opacity=1;
+	serviceImg[b].style.opacity=0;
+	serviceImg[c].style.opacity=0;
+	serviceImg[d].style.opacity=0;
+	a++;
+	b++;
+	c++;
+	d++;
+
+	if(a==4){
+	a=0;
+	}
+	if(b==4){
+	b=0;
+	}
+	if(c==4){
+	c=0;
+	}
+	if(d==4){
+	d=0;
+	}	
+	setTimeout(serviceImgSlides, 2000);
+}
+
+/*
+primiumImg
+primium1
+primium2
+primium3
+primium4
+primium5
+primium6
+*/
+	var e=0;
+	var f=1;
+	var g=2;
+	var h=3;
+	var i=4;
+	var j=5;
+	var k=6;
+primiumImgSlides();
+
+function primiumImgSlides(){
+	var z=[e,f,g,h,i,j];
+	var primiumImg=document.getElementsByClassName("primiumImg");
+	primiumImg[e].style.opacity=1;
+	primiumImg[f].style.opacity=0;
+	primiumImg[g].style.opacity=0;
+	primiumImg[h].style.opacity=0;
+	primiumImg[i].style.opacity=0;
+	primiumImg[j].style.opacity=0;
+
+	e++;
+	f++;
+	g++;
+	h++;
+	i++;
+	j++;
+
+
+	if(e==6){
+	e=0;
+	}
+	if(f==6){
+	f=0;
+	}
+	if(g==6){
+	g=0;
+	}
+	if(h==6){
+	h=0;
+	}
+	if(i==6){
+	i=0;
+	}
+	if(j==6){
+	j=0;
+	}	
+
+	setTimeout(primiumImgSlides, 3000);
+}
+
+
+</script>
+
+
+
+</body>
+</html>
