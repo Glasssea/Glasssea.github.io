@@ -1,0 +1,3200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>기억의 미로 main</title>
+<style>
+/*==============================메인화면========================================*/
+.logo{
+  margin-top:40px;
+  font-size: 120px;
+  color: #9986EE;
+  text-align:center;
+  text-shadow: 1px 1px 2px black, 0 0 30px #6A5ACD;
+  animation: logo 4s linear infinite;
+}
+
+@keyframes logo{
+ 0%,
+ 100%{
+   0 1vw #6A5ACD, 0 0 3vw #6A5ACD, 0 0 10vw #6A5ACD, 0 0 10vw #6A5ACD, 0 0 .4vw #6A5ACD, .5vw .5vw .1vw #6A5ACD;
+    color: #9986EE;
+  }
+  50%{
+  text-shadow: 0 0 .5vw #897BE6, 0 0 1.5vw #897BE6, 0 0 5vw #897BE6, 0 0 5vw #897BE6, 0 0 .2vw #897BE6, .5vw .5vw .1vw #231A61;
+    color: #776CBF;   
+   }
+}
+
+div.btn_container{
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+}
+
+.btn {
+  margin: 30px;
+  padding: 15px 25px;
+  position: relative;
+  left: 0;
+  top: 30%;
+  font-size: 30px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+}
+
+.btn#start{
+  display: inline-block;
+  //vertical-align:middle;
+  background-color: #880088;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #440044;
+  
+}
+
+.btn#start:hover {background-color: #660066}
+
+.btn#start:active {
+  background-color: #660066;
+  box-shadow: 0 5px #440044;
+  transform: translateY(4px);
+}
+
+.btn#ex{
+  display: inline-block;
+  vertical-align:middle;
+  background-color: #004c99;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #002355;
+}
+
+.btn#ex:hover {background-color: #003366}
+
+.btn#ex:active {
+  background-color: #003366;
+  box-shadow: 0 5px #002355;
+  transform: translateY(4px);
+}
+
+.btn#list{
+  display: inline-block;
+  vertical-align:middle;
+  background-color: #6600cc;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #4c0099;
+}
+
+.btn#list:hover {background-color: #330066}
+
+.btn#list:active {
+  background-color: #330066;
+  box-shadow: 0 5px #4c0099;
+  transform: translateY(4px);
+}
+
+.cMotion1{
+  margin:0 2%;
+  color: #fff;
+  display: flex;
+  position: absolute;
+  top: 0;
+  width: 300px;
+  height: 100px;
+ // border: 1px solid white;
+  float: left;
+  z-index:1;
+  animation: jump1 3s infinite;
+  animation-direction: alternate;
+}
+
+
+.cMotion2{
+  margin: 0 75%;
+  color: #fff;
+  display: flex;
+  position: absolute;
+  top: 0;
+  width: 300px;
+  height: 100px;
+  //border: 1px solid white;
+  z-index:1;
+  animation: jump2 3s infinite;
+  animation-direction: alternate;
+}
+
+@keyframes jump1{
+from{
+  margin-top: 5%;
+  height: 50%;
+  }
+to{
+  margin-top: 50%;
+  height: 100%;
+  }
+}
+
+@keyframes jump2{
+from{
+  margin-top: 50%;
+  height: 50%;
+  }
+to{
+  margin-top: 5%;
+  height: 100%;
+  }
+}
+
+
+
+/* ==========================================게임 화면============================*/
+#gameCanvas {display: none; margin: 0 auto;}
+#mapCanvas {display: none; margin: 0 auto;}
+
+#charCanvas {display: none; margin: 0 auto;}
+#char70Canvas {display: none; margin: 0 auto;}
+#charLCanvas {display: none; margin: 0 auto;}
+#charRCanvas {display: none; margin: 0 auto;}
+#makeFaceCanvas {display: none; margin: 0 auto;}
+# {display: block; margin:0 auto;}
+.charMadeCanvas {display: none; margin: 0 auto;}
+.charMadeCanvas1 {display: none; margin: 0 auto; font-size: 30px;
+  color: white;  width: 150px; height:70px;}
+.playGameCanvas {display: none; margin: 0 auto;}
+
+@font-face{
+    font-family:'NeoDunggeunmo Pro';
+    src:'./fonts/NeoDunggeunmoPro-Regular.woff') format('woff');
+}
+*{ font-family:'NeoDunggeunmo Pro',sans-serif; }
+
+body{
+background-image:url('icons/bg3.png');
+background-size: cover;
+}
+
+
+.scoreModal {
+  display: none;
+  position: fixed; 
+  z-index: 8; 
+  padding-top: 100px; 
+  left: 10%;
+  top: 5%;
+  width: 70%; 
+  height: 80%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.7);
+}
+
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 600px;
+  color: #ccc;
+  padding: 10px 0;
+  height: 500px;
+  font-size: 35px;
+  vertical-align:middle;
+  text-align: center;
+  border: 2px solid white;
+  border-radius: 15px;
+}
+
+#caption {  
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+.close1 {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close1:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#skull{
+ position:flex;
+ vertical-align:middle;
+}
+
+div{
+  display:block;
+  margin: 20px;
+  padding: 10px 50px;
+}
+ div img{
+width:40px;
+height:40px;
+}
+
+div.list{
+//position: relative;
+}
+
+#stop{
+  display: none;
+  vertical-align:middle;
+  background-color: #6600cc;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #4c0099;
+}
+
+#stop:hover {background-color: #330066}
+
+#stop:active {
+  background-color: #330066;
+  box-shadow: 0 5px #4c0099;
+  transform: translateY(4px);
+}
+
+#itemkanCanvas{
+  display: none;
+  vertical-align:middle;
+  background-opacity:0.5;
+  background-color: #004c99;
+  border: none;
+  border-radius: 15px;
+}
+
+
+.charMadeCanvas{
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px 5px #1B0964
+}
+
+#char70Canvas{
+  border: none;
+  border-radius: 0px;
+  box-shadow: none;
+}
+
+#charLCanvas, #charRCanvas{
+  border: 1px solid black;
+  border-radius: 0px;
+  box-shadow: none;
+}
+
+#charRCanvas, #charLCanvas, #headLCanvas, #headRCanvas, #eyesLCanvas, #eyesRCanvas, #noseLCanvas, #noseRCanvas, #chinLCanvas, #chinRCanvas{
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  padding: 16px;
+  overflow: hidden;
+  margin-top: -22px;
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+
+
+.btn {
+  margin: 30px;
+  padding: 15px 25px;
+  position: relative;
+  font-size: 30px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  z-index: 6;
+}
+
+#main{
+  display: none;
+  position:absolute;
+  left: 1015px;
+  top: 710px;    
+width=250px;
+height=100px;
+//vertical-align:middle;
+  background-color: #880088;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #440044;
+  
+}
+
+.btn#main:hover {background-color: #660066}
+
+.btn#main:active {
+  background-color: #660066;
+  box-shadow: 0 5px #440044;
+  transform: translateY(4px);
+}
+
+#st{
+  display: none;
+  position:absolute;
+  left: 1345px;
+  top: 710px; 
+width=250px;
+height=100px;
+  //vertical-align:middle;
+  background-color: #004c99;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #002355;
+}
+
+.btn#st:hover {background-color: #003366}
+
+.btn#st:active {
+  background-color: #003366;
+  box-shadow: 0 5px #002355;
+  transform: translateY(4px);
+}
+
+
+/*========================순위표 CSS=============================*/
+td {
+    text-align:center;
+    color:white;
+    font-size:50px;
+    width:500px;
+    height:150px;
+    line-height:2.5;
+}
+table{
+  position: absolute;
+  top:50px;
+  left:100px;
+}
+
+.rankingModal {
+  display: none;
+  position:fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 90%;
+  height: 90%;
+  overflow: auto;
+  background-image:url("icons/bg3.png");
+  background-size: cover;
+}
+
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+/*=======================게임 설명====================*/
+.Desmodal { display:none;   position:fixed;   z-index:1;   padding-top:40px;   left:0;   top:0;   width:90%;   height:100%;   overflow:auto;   background-image:url('icons/bg3.png');   background-size: cover;   background-color:rgba(0,0,0,0.9); }
+
+.desModal-content { margin-left:60%;   margin-top:6%;   display:block;   width:80%;   max-width:400px;   }
+
+.desText { margin:auto;   display:block;   width:100%;   text-align:center;   color:#ccc;   padding:625px 0 0 0;   height:150px;   font-size:45px; }
+
+.itemDes { display:block;   width:80%;   height:150px;   max-width:700%;   text-align:center;   color:#ccc;   font-size:35px;   padding:5px;   padding-left:150px; }
+
+.desModal-content, .desText, .itemDes, .Desimg03, .desButton { -webkit-animation-name:desZoom;   -webkit-animation-duration:0.6s;   animation-name:desZoom;   animation-duration:0.6s; }
+
+@-webkit-keyframes desZoom {   from { -webkit-transform:scale(0) }   to { -webkit-transform:scale(1) }   }
+
+@keyframes desZoom {   from { transform:scale(0) }   to { transform:scale(1) }   }
+
+.desClose { position:absolute;   top:10px;   right:60px;   color:#f1f1f1;   font-size:120px;   font-weight:bold;   transition:0.3s;   font-family:auto; }
+
+.desClose:hover, .desClose:focus { color:#bbb;   text-decoration:none;   cursor:pointer; }
+
+.desPrev, .desNext { cursor:pointer;   position:absolute;   top:50%;   width:auto;   margin:-150px 50px 0 50px;   color:white;   font-weight:bold;   font-size:150px;   transition:0.6s ease;   border-radius:0 3px 3px 0;   user-select:none; }
+
+.desNext { right:0;   border-radius:3px 0 0 3px; }
+
+.desPrev:hover, .desNext:hover { background-color:rgba(0,0,0,0.8); }
+
+.gameDesText { color:red;   font-size:75px;   padding-left:70px; }
+
+#Desimg02 {height:400px; width:400px; margin-left:37%;   maring-bottom:10px; }
+
+.Desimg03 { height:200px; width:200px;   max-width:200px;   display:block;   margin:50px 0 0 12%;   background:none; }
+
+.des { position:absolute;   left:200px; }
+
+.desButton { padding: 10px 25px;   font-size: 80px;   text-align: center;   outline: none;   color: #fff;   background-color: #04AA6D;   border: none;   border-radius: 15px;   box-shadow: 0 9px #999;   margin-left:10px;   font-family:auto;   position:absolute;   top:50%; }
+
+@keyframes keyboardKK { from { background-color: #3e8e41;   box-shadow: 0 5px #666;   transform: translateY(10px); } }
+
+.db1, .db3, .db5, .db7, .db9, .db11 { right:500px; } .db2, .db6, .db10 { right:650px; } .db4, .db8, .db12 { right:350px; }
+
+.db1, .db5, .db9 { top:35%; }
+
+.db1, .db8, .db9 { animation:keyboardKK 1.5s infinite; }
+
+.db12 { animation:keyboardKK 1.5s infinite; animation-delay: 2s;}
+
+#desMap {display:block;   margin: 0 auto;   z-index:2;   position:absolute;   top:200px;   left:400px;}
+
+#desGame {display:block;   margin: 0 auto;   z-index:3;   position:absolute;   top:200px;   left:400px;}
+
+#desMap02 {display:block;   margin: 0 auto;   z-index:2;   position:absolute;   top:200px;   left:400px;}
+
+#desGame02 {display:block;   margin: 0 auto;   z-index:3;   position:absolute;   top:200px;   left:400px;}
+
+#desMap03 {display:block;   margin: 0 auto;   z-index:2;   position:absolute;   top:200px;   left:400px;}
+
+#desGame03 {display:block;   margin: 0 auto;   z-index:3;   position:absolute;   top:200px;   left:400px;}
+
+
+
+
+
+
+</style>
+
+<script>
+/*----------------------------순위표 로컬 관련 스크립트----------------------*/
+var rankingTemp=[];
+var scoreArr=[];
+var rankingData=[];
+
+for(let i=0; i<localStorage.length; i++) {
+    let key = localStorage.key(i);
+    rankingTemp.push(`${localStorage.getItem(key)}`);
+}
+
+//배열에 저장한 데이터를 점수순으로 정렬
+
+function dataSort(){
+    for(let i=0; i<rankingTemp.length; i++) {
+        rankingTemp[i]=rankingTemp[i].split("|");
+        scoreArr.push(Number(rankingTemp[i][0]));
+    };
+    scoreArr.sort(function(a,b){
+        return b-a; //숫자 내림차순 정렬
+    });
+
+    for(let i=0; i<scoreArr.length; i++) {
+        rankingTemp[i][0]=Number(rankingTemp[i][0]);
+        rankingData[i]=scoreArr[i]+"|"+rankingTemp[i][1];
+        rankingData[i]=rankingData[i].split("|");
+    }
+
+    console.log(rankingData);
+};
+
+dataSort();
+
+//정렬한 배열을 적재적소에 출력
+var rank=document.querySelector("#ranking")
+
+
+</script>
+
+
+
+
+</head>
+
+<body>
+<!--  _____________________________________메인화면______________________________________________ -->
+<div class="logo"><strong>기억의 미로</strong></div><br>
+
+<div class="btn_container">
+<button class="btn" id="start" onclick="chooseYourChar();">게임 시작<a href="" ></a></button><br>
+<button class="btn" id="ex" onclick="howToGame();">게임 설명<a href="" > </a></button><br>
+<button class="btn" id="list" onclick="ranking();">순 위 표<a href="" > </a></button>
+</div>
+<div class="cMotion1">
+<span> <img src="icons/face.png" style="width:50px; height:50px;"></span>
+<span> <img src="icons/face.png" style="width:50px; height:50px;"></span>
+</div>
+<div class="cMotion2">
+<span><img src="icons/face.png" style="width:50px; height:50px;"></span>
+<span><img src="icons/face.png" style="width:50px; height:50px;"></span>
+</div>
+
+<!-- ______________________________________________게임설명________________________________________-->
+<div class="Desmodal desSlides">
+	<span class="gameDesText">게임설명</span>
+	<span class="desClose">&times;</span>
+    <canvas id="desMap" width='450px' height='450px'></canvas>
+    <canvas id="desGame" width='450px' height='450px'></canvas>
+    <button class="desButton db1">△</button>
+    <button class="desButton db2">◁</button>
+    <button class="desButton db3">▽</button>
+    <button class="desButton db4">▷</button>
+	<div class="desText">방향키로 캐릭터를 1칸 씩 움직일 수 있다.</div>
+	<a class="desPrev" onclick="plusSlides(-1)">❮</a>
+	<a class="desNext" onclick="plusSlides(1)">❯</a>
+</div>
+
+<div class="Desmodal desSlides">
+	<span class="gameDesText">게임설명</span>
+	<span class="desClose">&times;</span>
+    <canvas id="desMap02" width='450px' height='450px'></canvas>
+    <canvas id="desGame02" width='450px' height='450px'></canvas>
+    <button class="desButton db5">△</button>
+    <button class="desButton db6">◁</button>
+    <button class="desButton db7">▽</button>
+    <button class="desButton db8">▷</button>
+    <div class="desText">깃발이 있는 목적지까지 지뢰를 밟지않고 이동하면 스테이지 클리어가 된다.</div>
+	<a class="desPrev" onclick="plusSlides(-1)">❮</a>
+	<a class="desNext" onclick="plusSlides(1)">❯</a>
+</div>
+
+<div class="Desmodal desSlides">
+	<span class="gameDesText">게임설명</span>
+	<span class="desClose">&times;</span>
+    <canvas id="desMap03" width='450px' height='450px'></canvas>
+    <canvas id="desGame03" width='450px' height='450px'></canvas>
+    <button class="desButton db9">△</button>
+    <button class="desButton db10">◁</button>
+    <button class="desButton db11">▽</button>
+    <button class="desButton db12">▷</button>
+    <div class="desText">지뢰가 있는 칸으로 이동하면 캐릭터는 처음으로 돌아간다.</div>
+	<a class="desPrev" onclick="plusSlides(-1)">❮</a>
+	<a class="desNext" onclick="plusSlides(1)">❯</a>
+</div>
+
+<div class="Desmodal desSlides">
+	<span class="gameDesText">아이템설명</span>
+	<span class="desClose">&times;</span>
+    <img class="desModal-content" id="Desimg02" src="icons/랜덤박스.png" >
+    <div class="itemDes">아이템이 있는 칸에 도착 시 무작위한 아이템 획득, 아이템 획득 시 아이템 칸에 저장 (예외:독약)</div>
+    <div class="itemDes">아이템 사용 방법 : 원하는 칸에 들어있는 숫자버튼을 눌러 사용</div>
+	<a class="desPrev" onclick="plusSlides(-1)">❮</a>
+	<a class="desNext" onclick="plusSlides(1)">❯</a>
+</div>
+
+<div class="Desmodal desSlides">
+	<span class="gameDesText">아이템설명</span>
+	<span class="desClose">&times;</span>
+    <img class="Desimg03" src="icons/돋보기.png">
+    <img class="Desimg03" src="icons/망원경.png">
+    <img class="Desimg03" src="icons/독약.png">
+    <div class="itemDes des" style="top:250px">사용 시 내 캐릭터 주변 1칸의 지뢰 위치를 스테이지가 끝날 때 까지 확인시켜준다</div>
+    <div class="itemDes des" style="top:500px">사용 시 맵 전체의 모든 지뢰를 1초간 확인시켜 준다.</div>
+    <div class="itemDes des" style="top:750px">습득 시 자동으로 사용, 20초 동안 방향키가 반대로 작동</div>
+	<a class="desPrev" onclick="plusSlides(-1)">❮</a>
+	<a class="desNext" onclick="plusSlides(1)">❯</a>
+</div>
+
+
+
+
+
+<!-- _______________________________________________캐릭터_________________________________________-->
+
+<canvas id="charCanvas" class="charMadeCanvas" width="700px" height="700px" style="position:absolute; top:200px; left:200px; background:#f0f0f0; z-index:5;"></canvas>
+<canvas id="charLCanvas" class="charMadeCanvas" width="80px" height="50px" style="position:absolute; top:500px; left:190px; z-index:6;"></canvas>
+<canvas id="charRCanvas" class="charMadeCanvas" width="80px" height="50px" style="position:absolute; top:500px; left:850px; z-index:6;"></canvas>
+<canvas id="char70Canvas" class="charMadeCanvas" width="70px" height="70px" style="position:absolute; top:200px; left:200px; z-index:6;"></canvas>
+<canvas id="makeFaceCanvas" class="charMadeCanvas" width="700px" height="700px" style="position:absolute; top:200px; left:950px; background:#2D0AB7; z-index:4;"></canvas>
+
+<canvas id="headLCanvas" class="charMadeCanvas" width="80px" height="36px" style="position:absolute; top:257px; left:950px; z-index:5;"></canvas>
+<canvas id="headRCanvas" class="charMadeCanvas" width="80px" height="36px" style="position:absolute; top:257px; left:1590px; z-index:5;"></canvas>
+<canvas id="head1Canvas" class="charMadeCanvas" width="100px" height="100px" style="position:absolute; top:225px; left:1030px;  z-index:5; background:#f0f0f0;"></canvas>
+<canvas id="head2Canvas" class="charMadeCanvas" width="100px" height="100px" style="position:absolute; top:225px; left:1180px;  z-index:5; background:#f0f0f0;"></canvas>
+<canvas id="head3Canvas" class="charMadeCanvas" width="100px" height="100px" style="position:absolute; top:225px; left:1330px;  z-index:5; background:#f0f0f0;"></canvas>
+<canvas id="head4Canvas" class="charMadeCanvas" width="100px" height="100px" style="position:absolute; top:225px; left:1480px;  z-index:5; background:#f0f0f0;"></canvas>
+<canvas id="eyesLCanvas" class="charMadeCanvas" width="80px" height="36px" style="position:absolute; top:382px; left:950px; z-index:5; "></canvas>
+<canvas id="eyesRCanvas" class="charMadeCanvas" width="80px" height="36px" style="position:absolute; top:382px; left:1590px; z-index:5; "></canvas>
+<canvas id="eyes1Canvas" class="charMadeCanvas" width="100px" height="100px" style="position:absolute; top:350px; left:1030px;  z-index:5; background:#f0f0f0;"></canvas>
+<canvas id="eyes2Canvas" class="charMadeCanvas" width="100px" height="100px" style="position:absolute; top:350px; left:1180px;  z-index:5; background:#f0f0f0;"></canvas>
+<canvas id="eyes3Canvas" class="charMadeCanvas" width="100px" height="100px" style="position:absolute; top:350px; left:1330px; z-index:5;  background:#f0f0f0;"></canvas>
+<canvas id="eyes4Canvas" class="charMadeCanvas" width="100px" height="100px" style="position:absolute; top:350px; left:1480px;  z-index:5; background:#f0f0f0;"></canvas>
+<canvas id="noseLCanvas" class="charMadeCanvas" width="80px" height="36px" style="position:absolute; top:507px; left:950px; z-index:5; "></canvas>
+<canvas id="noseRCanvas" class="charMadeCanvas" width="80px" height="36px" style="position:absolute; top:507px; left:1590px; z-index:5; "></canvas>
+<canvas id="nose1Canvas" class="charMadeCanvas" width="100px" height="100px" style="position:absolute; top:475px; left:1030px; z-index:5; background:#f0f0f0;"></canvas>
+<canvas id="nose2Canvas" class="charMadeCanvas" width="100px" height="100px" style="position:absolute; top:475px; left:1180px; z-index:5; background:#f0f0f0;"></canvas>
+<canvas id="nose3Canvas" class="charMadeCanvas" width="100px" height="100px" style="position:absolute; top:475px; left:1330px; z-index:5; background:#f0f0f0;"></canvas>
+<canvas id="nose4Canvas" class="charMadeCanvas" width="100px" height="100px" style="position:absolute; top:475px; left:1480px; z-index:5; background:#f0f0f0;"></canvas>
+<canvas id="chinLCanvas" class="charMadeCanvas" width="80px" height="36px" style="position:absolute; top:632px; left:950px; z-index:5;"></canvas>
+<canvas id="chinRCanvas" class="charMadeCanvas" width="80px" height="36px" style="position:absolute; top:632px; left:1590px; z-index:5;"></canvas>
+<canvas id="chin1Canvas" class="charMadeCanvas" width="100px" height="100px" style="position:absolute; top:600px; left:1030px; z-index:5; background:#f0f0f0;"></canvas>
+<canvas id="chin2Canvas" class="charMadeCanvas" width="100px" height="100px" style="position:absolute; top:600px; left:1180px; z-index:5; background:#f0f0f0;"></canvas>
+<canvas id="chin3Canvas" class="charMadeCanvas" width="100px" height="100px" style="position:absolute; top:600px; left:1330px; z-index:5; background:#f0f0f0;"></canvas>
+<canvas id="chin4Canvas" class="charMadeCanvas" width="100px" height="100px" style="position:absolute; top:600px; left:1480px; z-index:5; background:#f0f0f0;"></canvas>
+<!--canvas id="mainCanvas" class="charMadeCanvas" width="250px" height="100px" style="position:absolute; top:750px; left:1015px; z-index:5; background:#000000;"></canvas-->
+<!--canvas id="startCanvas" class="charMadeCanvas" width="250px" height="100px" style="position:absolute; top:750px; left:1345px; z-index:5; background:#000000;"></canvas-->
+
+<!--캐릭터 꾸미기 화면 하단 버튼-->
+<button class="charMadeCanvas1" id="main" style="z-index:6">처음으로</button><br>
+<button class="charMadeCanvas1" id="st" style="z-index:6">게임 시작</button><br>
+<!-- btn1 -->
+
+
+<canvas id="eventCanvas" width="250px" height="100px" style="position:absolute; top:200px; left:1200px"></canvas>
+<!-- _________________________________________________게임_______________________________________________________________________________________________-->
+
+<canvas id="mapCanvas" class="playGameCanvas" width="700px" height="700px" style="position:absolute; top:200px; left:200px; z-index:1;"></canvas> <!--background:#f0f0f0;-->
+<canvas id="gameCanvas" class="playGameCanvas" width="700px" height="700px" style="position:absolute; top:200px; left:200px; z-index:3;"></canvas>
+<canvas id="itemkanCanvas" class="playGameCanvas" width="150px" height="480px" style="position:absolute; top:200px; left:950px; box-shadow: 0px 0px 10px 5px #004c99; z-index:2;"></canvas>
+<canvas id="itemCanvas1" class="playGameCanvas" width="50px" height="50px" style="position:absolute; top:290px; left:1005px; z-index:3;"></canvas>
+<canvas id="itemCanvas2" class="playGameCanvas" width="50px" height="50px" style="position:absolute; top:390px; left:1005px; z-index:3;"></canvas>
+<canvas id="itemCanvas3" class="playGameCanvas" width="50px" height="50px" style="position:absolute; top:490px; left:1005px; z-index:3;"></canvas>
+<canvas id="itemCanvas4" class="playGameCanvas" width="50px" height="50px" style="position:absolute; top:590px; left:1005px; z-index:3;"></canvas>
+<canvas id="itemtextCanvas1" class="playGameCanvas" width="200px" height="100px" style="position:absolute; top:260px; left:1075px; z-index:3;"></canvas>
+<canvas id="itemtextCanvas2" class="playGameCanvas" width="200px" height="100px" style="position:absolute; top:360px; left:1075px; z-index:3;"></canvas>
+<canvas id="itemtextCanvas3" class="playGameCanvas" width="200px" height="100px" style="position:absolute; top:460px; left:1075px; z-index:3;"></canvas>
+<canvas id="itemtextCanvas4" class="playGameCanvas" width="200px" height="100px" style="position:absolute; top:560px; left:1075px; z-index:3;"></canvas>
+
+<!-- ________________________________________________________타임, 스코어, 스탑버튼________________________________________________________________________-->
+<div class="playGameCanvas" style="width:150px;position:absolute;top:675px; left:880px;font-size:25px; text-align:center;color:white;">
+    TIME<br>
+    <span id="myTimer"></span>
+</div>
+
+<div class="playGameCanvas" style="width:150px;position:absolute; top:750px; left:880px;font-size:25px;text-align:center;color:white;">
+    SCORE<br><span id="score" ></span>
+</div>
+
+<button id="stop" class="playGameCanvas" onclick="gameOver();" style="position:absolute;width:150px;height:50px; top:850px;font-size:20px; left:950px;">게임 종료</button>
+<button id="start"  style="display:none;">재시작</button>
+
+
+<!-- 게임종료 시 점수 보여주는 화면 -->
+<!-- 게임종료 시 점수 보여주는 화면 -->
+<div id="gameover" class="scoreModal">
+  <span class="close1">&times;</span>
+<div id="caption">
+  <div id="stage" class="list"> </div>
+  <div id="dead" class="list"> </div>
+  <div id="clear" class="list"></div>
+  <div id="lefttime" class="list"></div>
+  <div id="result" class="list"></div>
+</div></div>
+
+<!-- =====================순위표 관련 html 태그========== -->
+<div id="myModal" class="rankingModal">
+    <table>
+        <tr>
+            <td>순위</td>
+            <!--<th>캐릭터</th>-->
+            <td>점수</td>
+            <td>이름</td>
+        </tr>
+        <tbody>
+            <tr>
+                <td>
+                    <script>
+                        for(let i=0; i<rankingData.length; i++) {
+                            if (i==0){
+                                document.write('<img src="icons/1st.png">');
+                                document.write("<br>");
+                            }
+                            else if (i==1){
+                                document.write('<img src="icons/2nd.png">');
+                                document.write("<br>");
+                            }
+                            else if (i==2){
+                                document.write('<img src="icons/3rd.png">');
+                                document.write("<br>");
+                            }
+                            else{
+                                document.write(i+1);
+                                document.write("<br>");
+                            }
+                        };
+                    </script>
+                </td>
+                <!--<td></td>-->
+                <td>
+                    <script>
+                        for(let i=0; i<rankingData.length; i++) {
+                            document.write(rankingData[i][0]);
+                            document.write("<br>");
+                        };
+                    </script>
+                </td>
+                <td>
+                    <script>
+                        for(let i=0; i<rankingData.length; i++) {
+                            document.write(rankingData[i][1]);
+                            document.write("<br>");
+                        };
+                    </script>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <span class="close" onclick="rankingClose()" style="z-index:22">&times;</span>
+</div>
+
+
+
+<script>
+/*----------------------------------------------------메인 관련 함수-----------------------------------------------------*/
+/*-----------------------------------------------------시퀀스 관련 함수--------------------------------------------------*/
+/*----------------------------------------------------게임 시작 버튼---------------------------------------------------*/
+function chooseYourChar() //게임시작 버튼과 연동 되어있는 캐릭터 선택 창 올라오는 함수
+{ 
+classCharMadeCanvas=document.getElementsByClassName("charMadeCanvas")
+classCharMadeCanvas1=document.getElementsByClassName("charMadeCanvas1")
+for(var i=0; i<classCharMadeCanvas.length; i++)
+	{
+	classCharMadeCanvas[i].style.display="block";
+	}
+for(var i=0; i<classCharMadeCanvas1.length; i++)
+	{
+	classCharMadeCanvas1[i].style.display="block";
+	}
+
+classBtn=document.getElementsByClassName("btn")
+for(var i=0; i<classBtn.length; i++)
+	{
+	classBtn[i].style.display="none";
+	}
+}
+
+
+/*캐릭터 선택 칸에서 다른 페이지로 이동*/
+function goToMain()
+{
+classCharMadeCanvas=document.getElementsByClassName("charMadeCanvas")
+classCharMadeCanvas1=document.getElementsByClassName("charMadeCanvas1")
+for(var i=0; i<classCharMadeCanvas.length; i++)
+	{
+	classCharMadeCanvas[i].style.display="none";
+	}
+for(var i=0; i<classCharMadeCanvas1.length; i++)
+	{
+	classCharMadeCanvas1[i].style.display="none";
+	}
+classBtn=document.getElementsByClassName("btn")
+for(var i=0; i<classBtn.length; i++)
+	{
+	classBtn[i].style.display="block";
+	}
+imgFace.src=newFace[0];
+myHeadImg.src=head[0];
+myEyesImg.src=eyes[0];
+myNoseImg.src=nose[0];
+myChinImg.src=chin[0];
+putOnChar();
+}
+
+
+function gameStart()
+{scoreUpdate.innerHTML=100;
+itemCtx1.clearRect(0, 0, 50, 50);    //  1~4번 칸 아이템 지우기
+itemImg1=new Image();
+itemCtx2.clearRect(0, 0, 50, 50);
+itemImg2=new Image();
+itemCtx3.clearRect(0, 0, 50, 50);
+itemImg3=new Image();
+itemCtx4.clearRect(0, 0, 50, 50);
+itemImg4=new Image();
+   //독약 초기화
+   window.onkeydown="";
+   itemButton();
+   document.addEventListener("keydown", keyDownHandler, false);
+   itemUseMine=[]    //  돋보기 사용한 지뢰 위치 초기화
+timer.run(timerId,1000);
+classCharMadeCanvas=document.getElementsByClassName("charMadeCanvas")
+classCharMadeCanvas1=document.getElementsByClassName("charMadeCanvas1")
+for(var i=0; i<classCharMadeCanvas.length; i++)
+	{
+	classCharMadeCanvas[i].style.display="none";
+	}
+for(var i=0; i<classCharMadeCanvas1.length; i++)
+	{
+	classCharMadeCanvas1[i].style.display="none";
+	}
+classPlayGameCanvas=document.getElementsByClassName("playGameCanvas")
+for(var i=0; i<classPlayGameCanvas.length; i++)
+	{
+	classPlayGameCanvas[i].style.display="block";
+	}
+gameCtx.clearRect(0,0,700,700);
+mineXY=newMap();
+itemXY=randomItem();
+charX=0*70;
+charY=9*70;
+char();
+count=41;
+}
+
+
+
+function howToGame() //게임 설명 버튼과 연동되어있는 게임설명 올라오는 함수
+{
+	var slides = document.getElementsByClassName("desSlides");
+	slides[0].style.display = "block";
+	classBtn=document.getElementsByClassName("btn")
+	for(var i=0; i<classBtn.length; i++)
+	{
+	classBtn[i].style.display="none";
+	}
+
+}
+
+
+function ranking()
+{
+var rankingModal = document.getElementById("myModal");
+rankingModal.style.display = "block";
+classBtn=document.getElementsByClassName("btn")
+for(var i=0; i<classBtn.length; i++)
+	{
+	classBtn[i].style.display="none";
+	}
+}
+
+
+function rankingClose()
+{
+console.log("gf")
+var rankingModal = document.getElementById("myModal");
+rankingModal.style.display = "none";
+classBtn=document.getElementsByClassName("btn")
+for(var i=0; i<classBtn.length; i++)
+	{
+	classBtn[i].style.display="block";
+	}
+
+
+}
+
+
+
+function gameOver() //여기있는걸 시간초가 다 되었을 때도 똑같이 되게 만들어야 함 혹시
+{
+classPlayGameCanvas=document.getElementsByClassName("playGameCanvas")
+for(var i=0; i<classPlayGameCanvas.length; i++)
+	{
+	classPlayGameCanvas[i].style.display="none";
+	}
+classBtn=document.getElementsByClassName("btn")
+for(var i=0; i<classBtn.length; i++)
+	{
+	classBtn[i].style.display="block";
+	}
+rankingEntry()
+}
+
+
+/*-----------------------------------캐릭터 관련 함수-=-=-=-----------------------------------------------------------*/
+//-------------------------------------------------------설명 캔버스------------------------------------------------------
+
+
+
+var desMapCanvas=document.getElementById("desMap");
+var desMapCtx=desMapCanvas.getContext("2d");
+var desGameCanvas=document.getElementById("desGame");
+var desGameCtx=desGameCanvas.getContext("2d");
+var desMapCanvas02=document.getElementById("desMap02");
+var desMapCtx02=desMapCanvas02.getContext("2d");
+var desGameCanvas02=document.getElementById("desGame02");
+var desGameCtx02=desGameCanvas02.getContext("2d");
+var desMapCanvas03=document.getElementById("desMap03");
+var desMapCtx03=desMapCanvas03.getContext("2d");
+var desGameCanvas03=document.getElementById("desGame03");
+var desGameCtx03=desGameCanvas03.getContext("2d");
+
+
+//게임설명 맵 구성
+var bg=["icons/나무1.png","icons/나무2.png","icons/나무3.png", "icons/벽돌1.png", "icons/벽돌2.png", "icons/벽돌3.png",
+"icons/초록1.png", "icons/초록2.png", "icons/초록3.png", "icons/회벽1.png", "icons/회벽2.png", "icons/회벽3.png", "icons/하늘1.png", "icons/하늘2.png"]
+var rd=Math.floor(Math.random()*bg.length)
+
+var desImg1=new Image();
+desImg1.src=bg[rd];
+var desImg2=new Image();
+desImg2.src=bg[rd];
+var desImg3=new Image();
+desImg3.src= bg[rd];
+var desStart=new Image();
+desStart.src="icons/포탈1.png";
+var desFinish=new Image();
+desFinish.src="icons/finish.png";
+var desMine=new Image();
+desMine.src="icons/지뢰.png";
+
+desImg1.onload=function()
+{
+	for (i=0; i<3; i++)
+	{
+		for (j=0; j<3; j++)
+		{
+			desMapCtx.drawImage(desImg1, i*150, j*150, 150, 150);
+		}
+	}
+
+}
+desImg2.onload=function()
+{
+	for (i=0; i<3; i++)
+	{
+		for (j=0; j<3; j++)
+		{
+			desMapCtx02.drawImage(desImg2, i*150, j*150, 150, 150);
+			setTimeout(function (){desMapCtx02.drawImage(desStart, 0, 300, 150, 150);
+			desMapCtx02.drawImage(desFinish, 300, 0, 150, 150);}, 500);
+		}
+	}
+}
+desImg3.onload=function()
+{
+	for (i=0; i<3; i++)
+	{
+		for (j=0; j<3; j++)
+		{
+			desMapCtx03.drawImage(desImg3,  i*150, j*150, 150, 150);
+			setTimeout(function (){desMapCtx03.drawImage(desStart, 0, 300, 150, 150);
+			desMapCtx03.drawImage(desFinish, 300, 0, 150, 150);
+			desMapCtx03.drawImage(desMine, 150, 150, 150, 150);}, 500);
+		}
+	}
+}
+
+
+//게임설명 움직임
+var desCharImg=new Image();
+desCharImg.src="icons/백.png";
+var desBoom=new Image();
+desBoom.src="icons/boom.png";
+var desMoveY=300;
+var desFinishX=150;
+var desMineX=0;
+var desMineY=300;
+
+function desMove()
+{
+	//게임설명1 움직임
+	desGameCtx.clearRect(0, desMoveY, 150, 150);
+	desGameCtx.drawImage(desCharImg, 0, desMoveY, 150, 150);
+	desMoveY--
+	if(desMoveY==150)
+	{
+		desGameCtx.clearRect(0, desMoveY, 150, 150);
+		desMoveY=300;
+	}
+
+	//게임설명2 움직임
+	desGameCtx02.clearRect(desFinishX, 0, 150, 150);
+	desGameCtx02.drawImage(desCharImg, desFinishX, 0, 150, 150);
+	desFinishX++
+	if(desFinishX==300)
+	{
+		desGameCtx02.clearRect(desFinishX, 0, 150, 150);
+		desFinishX=150;
+	}
+
+	//게임설명3 움직임
+	desGameCtx03.clearRect(desMineX, desMineY, 150, 150);
+	desGameCtx03.drawImage(desCharImg, desMineX, desMineY, 150, 150);
+	if(desMineX==0 && 150<desMineY)
+	{
+		desMineY--
+	}
+	if(desMineY==150)
+	{
+		desMineX++
+	}
+	if(desMineX==150)
+	{
+		desGameCtx03.clearRect(desMineX, desMineY, 150, 150)
+		desGameCtx03.drawImage(desBoom, desMineX, desMineY, 150, 150);
+		setTimeout(function() {desGameCtx03.clearRect(150, 150, 150, 150);}, 500);
+		desMineX=0; 				desMineY=300;
+	}
+}
+setInterval(desMove, 10);
+
+
+//----------------------------------------------------------------------------------------------------------------------
+
+
+var gameEx=document.getElementById("ex")
+
+var slideIndex = 1;
+var slides = document.getElementsByClassName("desSlides");
+
+function plusSlides(n)
+{
+	showSlides(slideIndex += n);
+}
+
+function showSlides(n)
+{
+	if (n > slides.length) {slideIndex = 1}
+	if (n < 1) {slideIndex = slides.length}
+	for (let i = 0; i < slides.length; i++)
+	{
+		slides[i].style.display = "none";
+	}
+	slides[slideIndex-1].style.display = "block";
+}
+
+
+
+var desSpan = document.getElementsByClassName("desClose")
+var desModal=document.getElementsByClassName("Desmodal")
+
+for(let c=0; c<desSpan.length; c++)
+{
+	desSpan[c].onclick = function()
+	{
+	    desModal[c].style.display = "none";
+		slideIndex=0
+	classBtn=document.getElementsByClassName("btn")
+for(var i=0; i<classBtn.length; i++)
+	{
+	classBtn[i].style.display="block";
+	}
+	}
+}
+/*----------------------------------------------------------캐릭터 창------------------------------------------------------*/
+/*-------캐릭터ctx와 2d관련----*/
+var charCanvas=document.getElementById("charCanvas");
+var charCtx=charCanvas.getContext("2d");
+var charLCanvas=document.getElementById("charLCanvas");
+var charLCtx=charLCanvas.getContext("2d");
+var charRCanvas=document.getElementById("charRCanvas");
+var charRCtx=charRCanvas.getContext("2d");
+var char70Canvas=document.getElementById("char70Canvas");
+var char70Ctx=char70Canvas.getContext("2d");
+var headLCanvas=document.getElementById("headLCanvas");
+var headLCtx=headLCanvas.getContext("2d");
+var headRCanvas=document.getElementById("headRCanvas");
+var headRCtx=headRCanvas.getContext("2d");
+var head1Canvas=document.getElementById("head1Canvas");
+var head1Ctx=head1Canvas.getContext("2d");
+var head2Canvas=document.getElementById("head2Canvas");
+var head2Ctx=head2Canvas.getContext("2d");
+var head3Canvas=document.getElementById("head3Canvas");
+var head3Ctx=head3Canvas.getContext("2d");
+var head4Canvas=document.getElementById("head4Canvas");
+var head4Ctx=head4Canvas.getContext("2d");
+var eyesLCanvas=document.getElementById("eyesLCanvas");
+var eyesLCtx=eyesLCanvas.getContext("2d");
+var eyesRCanvas=document.getElementById("eyesRCanvas");
+var eyesRCtx=eyesRCanvas.getContext("2d");
+var eyes1Canvas=document.getElementById("eyes1Canvas");
+var eyes1Ctx=eyes1Canvas.getContext("2d");
+var eyes2Canvas=document.getElementById("eyes2Canvas");
+var eyes2Ctx=eyes2Canvas.getContext("2d");
+var eyes3Canvas=document.getElementById("eyes3Canvas");
+var eyes3Ctx=eyes3Canvas.getContext("2d");
+var eyes4Canvas=document.getElementById("eyes4Canvas");
+var eyes4Ctx=eyes4Canvas.getContext("2d");
+var noseLCanvas=document.getElementById("noseLCanvas");
+var noseLCtx=noseLCanvas.getContext("2d");
+var noseRCanvas=document.getElementById("noseRCanvas");
+var noseRCtx=noseRCanvas.getContext("2d");
+var nose1Canvas=document.getElementById("nose1Canvas");
+var nose1Ctx=nose1Canvas.getContext("2d");
+var nose2Canvas=document.getElementById("nose2Canvas");
+var nose2Ctx=nose2Canvas.getContext("2d");
+var nose3Canvas=document.getElementById("nose3Canvas");
+var nose3Ctx=nose3Canvas.getContext("2d");
+var nose4Canvas=document.getElementById("nose4Canvas");
+var nose4Ctx=nose4Canvas.getContext("2d");
+var chinLCanvas=document.getElementById("chinLCanvas");
+var chinLCtx=chinLCanvas.getContext("2d");
+var chinRCanvas=document.getElementById("chinRCanvas");
+var chinRCtx=chinRCanvas.getContext("2d");
+var chin1Canvas=document.getElementById("chin1Canvas");
+var chin1Ctx=chin1Canvas.getContext("2d");
+var chin2Canvas=document.getElementById("chin2Canvas");
+var chin2Ctx=chin2Canvas.getContext("2d");
+var chin3Canvas=document.getElementById("chin3Canvas");
+var chin3Ctx=chin3Canvas.getContext("2d");
+var chin4Canvas=document.getElementById("chin4Canvas");
+var chin4Ctx=chin4Canvas.getContext("2d");
+//var mainCanvas=document.getElementById("mainCanvas");
+//var mainCtx=mainCanvas.getContext("2d");
+//var startCanvas=document.getElementById("startCanvas");
+//var startCtx=startCanvas.getContext("2d");
+mainCanvas=document.getElementById("main")
+startCanvas=document.getElementById("st")
+
+
+/*---캐릭터 고르기 화살표 관련---*/
+var imgLeft=new Image();
+imgLeft.src="icons/left.png"
+var imgRight=new Image();
+imgRight.src="icons/right.png"
+
+imgLeft.onload=function()
+{
+headLCtx.drawImage(imgLeft,0,0,80,36);
+eyesLCtx.drawImage(imgLeft,0,0,80,36);
+noseLCtx.drawImage(imgLeft,0,0,80,36);
+chinLCtx.drawImage(imgLeft,0,0,80,36);
+charLCtx.drawImage(imgLeft,0,33,80,36);
+}
+imgRight.onload=function()
+{
+headRCtx.drawImage(imgRight,0,0,80,36);
+eyesRCtx.drawImage(imgRight,0,0,80,36);
+noseRCtx.drawImage(imgRight,0,0,80,36);
+chinRCtx.drawImage(imgRight,0,0,80,36);
+charRCtx.drawImage(imgRight,0,33,80,36);
+}
+
+/*--------------------------기본 얼굴 이미지-----------------------------*/
+var newFace=["icons/face/face.png","icons/face/hair0.png","icons/face/hair1.png","icons/face/bald.png"]
+
+var imgFace=new Image();
+imgFace.src="icons/face/face.png"
+imgFace.onload=function()
+{
+charCtx.drawImage(imgFace,0,0,700,700);
+char70Ctx.drawImage(imgFace,0,0,70,70);
+}
+
+
+
+/* 왼쪽 칸 부터 오른쪽으로 하나하나 그림 그려주는 함수 나중에 필요 없으면 지우기
+for(let i=0; i<4; i++){
+    makeFaceCtx.rect(40,75+i*100,100,100);
+    makeFaceCtx.fillText(i+1,55,100*i+95);
+    makeFaceCtx.stroke();
+}
+*/
+
+/*----------------------스킨 보유------------------------------*/
+var head=["icons/head/none.png","icons/head/anglering.png","icons/head/timo.png","icons/head/rain.png"]
+var eyes=["icons/eyes/none.png","icons/eyes/thuglife.png","icons/eyes/왹져.png","icons/eyes/chorong.png","icons/eyes/glasses1.png","icons/eyes/쌍안경.png","icons/eyes/돋보기.png"]
+var nose=["icons/nose/none.png","icons/nose/pikared.png","icons/nose/rouge.png","icons/nose/mustache.png"]
+var chin=["icons/chin/none.png","icons/chin/통붕대.png","icons/chin/momson.png","icons/chin/mask.png"]
+
+
+/*-----------------------------------------스킨 메뉴 기본 설정----------------------------------------------------*/
+//선택한 머리,눈,코,턱 장식의 변수 my~~~img
+var myFaceNum=0
+var myFace=newFace[0]
+var myHeadImg=""
+var myEyesImg=""
+var myNoseImg=""
+var myChinImg=""
+
+
+/*---------------스킨 캔버스배열 4개씩 머리,눈,코,턱------------------*/
+//머리눈코턱 캔버스페이지 변수
+var headPage=0;
+var eyesPage=0;
+var nosePage=0;
+var chinPage=0;
+
+
+/*------------------------------------머리-------------------------------------*/
+var headImg1=new Image();
+var headImg2=new Image();
+var headImg3=new Image();
+var headImg4=new Image();
+var myHeadImg=new Image();
+
+var head1List=""
+var head2List=""
+var head3List=""
+var head4List=""
+
+
+
+if(head.length>=1)
+{
+headImg1.src=head[0] //화살표 누르면 바뀌어야 할 부분
+headImg1.onload=function()
+	{
+	head1Ctx.drawImage(headImg1,0,0,100,100)
+	}
+var head1List=head[headPage*4+0] //화살표 누르면 바뀌어야 할 부분
+}
+
+if(head.length>=2)
+{
+headImg2.src=head[1]
+headImg2.onload=function()
+	{
+	head2Ctx.drawImage(headImg2,0,0,100,100)
+	}
+var head2List=head[headPage*4+1]
+}
+
+if(head.length>=3)
+{
+headImg3.src=head[2]
+headImg3.onload=function()
+	{
+	head3Ctx.drawImage(headImg3,0,0,100,100)
+	}
+var head3List=head[headPage*4+2]
+}
+
+if(head.length>=4)
+{
+headImg4.src=head[3]
+headImg4.onload=function()
+	{
+	head4Ctx.drawImage(headImg4,0,0,100,100)
+	}
+var head4List=head[headPage*4+3]
+}
+
+
+/*------------------------------눈---------------------*/	// 복사완료
+var eyesImg1=new Image();   
+var eyesImg2=new Image();
+var eyesImg3=new Image();
+var eyesImg4=new Image();
+var myEyesImg=new Image();
+
+var eyes1List=""
+var eyes2List=""
+var eyes3List=""
+var eyes4List=""
+
+if(eyes.length>=1)
+{
+eyesImg1.src=eyes[0]
+eyesImg1.onload=function()
+	{
+	eyes1Ctx.drawImage(eyesImg1,0,0,100,100)
+	}
+var eyes1List=eyes[eyesPage*4+0] //화살표 누르면 바뀌어야 할 부분
+}
+
+if(eyes.length>=2)
+{
+eyesImg2.src=eyes[1]
+eyesImg2.onload=function()
+	{
+	eyes2Ctx.drawImage(eyesImg2,0,0,100,100)
+	}
+var eyes2List=eyes[eyesPage*4+1] //화살표 누르면 바뀌어야 할 부분
+}
+
+if(eyes.length>=3)
+{
+eyesImg3.src=eyes[2]
+eyesImg3.onload=function()
+	{
+	eyes3Ctx.drawImage(eyesImg3,0,0,100,100)
+	}
+var eyes3List=eyes[eyesPage*4+2] //화살표 누르면 바뀌어야 할 부분
+}
+
+if(eyes.length>=4)
+{
+eyesImg4.src=eyes[3]
+eyesImg4.onload=function()
+	{
+	eyes4Ctx.drawImage(eyesImg4,0,0,100,100)
+	}
+var eyes4List=eyes[eyesPage*4+3] //화살표 누르면 바뀌어야 할 부분
+}
+
+
+/*-----------------------------------------코----------------------------------------------------*/
+var noseImg1=new Image();   
+var noseImg2=new Image();
+var noseImg3=new Image();
+var noseImg4=new Image();
+var myNoseImg=new Image();
+
+if(nose.length>=1)
+{
+noseImg1.src=nose[0]
+noseImg1.onload=function()
+	{
+	nose1Ctx.drawImage(noseImg1,0,0,100,100)
+	}
+var nose1List=nose[nosePage*4+0] //화살표 누르면 바뀌어야 할 부분
+}
+
+if(nose.length>=2)
+{
+noseImg2.src=nose[1]
+noseImg2.onload=function()
+	{
+	nose2Ctx.drawImage(noseImg2,0,0,100,100)
+	}
+var nose2List=nose[nosePage*4+1]
+}
+
+if(nose.length>=3)
+{
+noseImg3.src=nose[2]
+noseImg3.onload=function()
+	{
+	nose3Ctx.drawImage(noseImg3,0,0,100,100)
+	}
+var nose3List=nose[nosePage*4+2]
+}
+
+if(nose.length>=4)
+{
+noseImg4.src=nose[3]
+noseImg4.onload=function()
+	{
+	nose4Ctx.drawImage(noseImg4,0,0,100,100)
+	}
+var nose4List=nose[nosePage*4+3]
+}
+
+
+/*-----------------------------------------턱---------------------------------------------------*/
+var chinImg1=new Image();   
+var chinImg2=new Image();
+var chinImg3=new Image();
+var chinImg4=new Image();
+var myChinImg=new Image();
+
+if(chin.length>=1)
+{
+chinImg1.src=chin[0]
+chinImg1.onload=function()
+	{
+	chin1Ctx.drawImage(chinImg1,0,0,100,100)
+	}
+var chin1List=chin[chinPage*4+0]
+}
+
+if(chin.length>=2)
+{
+chinImg2.src=chin[1]
+chinImg2.onload=function()
+	{
+	chin2Ctx.drawImage(chinImg2,0,0,100,100)
+	}
+var chin2List=chin[chinPage*4+1]
+}
+
+if(chin.length>=3)
+{
+chinImg3.src=chin[2]
+chinImg3.onload=function()
+	{
+	chin3Ctx.drawImage(chinImg3,0,0,100,100)
+	}
+var chin3List=chin[chinPage*4+2]
+}
+
+if(chin.length>=4)
+{
+chinImg4.src=chin[3]
+chinImg4.onload=function()
+	{
+	chin4Ctx.drawImage(chinImg4,0,0,100,100)
+	}
+var chin4List=chin[chinPage*4+3]
+}
+
+
+/*---------------------이벤트 리스터 add------------------------------------*/
+charLCanvas.addEventListener("click", putOnCharL);
+charRCanvas.addEventListener("click", putOnCharR);
+//headLCanvas.addEventListener("click", headL);
+//headRCanvas.addEventListener("click", headR);
+head1Canvas.addEventListener("click", putOnHead1);
+head2Canvas.addEventListener("click", putOnHead2);
+head3Canvas.addEventListener("click", putOnHead3);
+head4Canvas.addEventListener("click", putOnHead4);
+//eyesLCanvas.addEventListener("click", eyesL);
+//eyesRCanvas.addEventListener("click", eyesR);
+eyes1Canvas.addEventListener("click", putOnEyes1);
+eyes2Canvas.addEventListener("click", putOnEyes2);
+eyes3Canvas.addEventListener("click", putOnEyes3);
+eyes4Canvas.addEventListener("click", putOnEyes4);
+//noseLCanvas.addEventListener("click", noseL);
+//noseRCanvas.addEventListener("click", noseR);
+nose1Canvas.addEventListener("click", putOnNose1);
+nose2Canvas.addEventListener("click", putOnNose2);
+nose3Canvas.addEventListener("click", putOnNose3);
+nose4Canvas.addEventListener("click", putOnNose4);
+//chinLCanvas.addEventListener("click", chinL);
+//chinRCanvas.addEventListener("click", chinR);
+chin1Canvas.addEventListener("click", putOnChin1);
+chin2Canvas.addEventListener("click", putOnChin2);
+chin3Canvas.addEventListener("click", putOnChin3);
+chin4Canvas.addEventListener("click", putOnChin4);
+mainCanvas.addEventListener("click", goToMain);
+startCanvas.addEventListener("click", gameStart);
+
+
+/*--------------------------------------------------------------이벤트리스너의 함수-----------------------------------------------------------*/
+/*-------------머리 눈 코 턱 장식 화살표 클릭 ------나중에 해결;;-----------*/
+/*
+function headL()
+{
+if(headPage>0)
+	{
+	headPage--;
+	head1Ctx.clearRect(0,0,100,100)
+	head2Ctx.clearRect(0,0,100,100)
+	head3Ctx.clearRect(0,0,100,100)
+	head4Ctx.clearRect(0,0,100,100)
+	if(head.length>headPage*4-1)
+		{console.log(headPage)
+		if(head.length>=headPage*4+1)
+			{
+			headImg1.src=head[headPage*4+0]; //화살표 누르면 바뀌어야 할 부분
+			headImg1.onload=function()
+				{
+				head1Ctx.drawImage(headImg1,0,0,100,100)
+				}
+			var head1List=head[headPage*4+0] //화살표 누르면 바뀌어야 할 부분
+			}
+		
+		if(head.length>=headPage*4+2)
+			{
+			headImg2.src=head[headPage*4+1]
+			headImg2.onload=function()
+				{
+				head2Ctx.drawImage(headImg2,0,0,100,100)
+				}
+			var head2List=head[headPage*4+1]
+			}
+		
+			if(head.length>=headPage*4+3)
+			{
+			headImg3.src=head[headPage*4+2]
+			headImg3.onload=function()
+				{
+				head3Ctx.drawImage(headImg3,0,0,100,100)
+				}
+			var head3List=head[headPage*4+2]
+			}
+		
+		if(head.length>=headPage*4+4)
+			{
+			headImg4.src=head[headPage*4+3]
+			headImg4.onload=function()
+				{
+				head4Ctx.drawImage(headImg4,0,0,100,100)
+				}
+			var head4List=head[headPage*4+3]
+			}	
+		}
+	}	
+}
+
+function headR()
+{
+if(headPage*4+4<=head.length)
+	{
+	headPage++;
+	if(head.length>headPage*4-1)
+		{console.log(headPage)
+		if(head.length>=headPage*4+1)
+			{
+			headImg1.src=head[headPage*4+0]; //화살표 누르면 바뀌어야 할 부분
+			headImg1.onload=function()
+				{
+				head1Ctx.drawImage(headImg1,0,0,100,100)
+				}
+			var head1List=head[headPage*4+0] //화살표 누르면 바뀌어야 할 부분
+			}
+		
+		if(head.length>=headPage*4+2)
+			{
+			headImg2.src=head[headPage*4+1]
+			headImg2.onload=function()
+				{
+				head2Ctx.drawImage(headImg2,0,0,100,100)
+				}
+			var head2List=head[headPage*4+1]
+			}
+		
+			if(head.length>=headPage*4+3)
+			{
+			headImg3.src=head[headPage*4+2]
+			headImg3.onload=function()
+				{
+				head3Ctx.drawImage(headImg3,0,0,100,100)
+				}
+			var head3List=head[headPage*4+2]
+			}
+		
+		if(head.length>=headPage*4+4)
+			{
+			headImg4.src=head[headPage*4+3]
+			headImg4.onload=function()
+				{
+				head4Ctx.drawImage(headImg4,0,0,100,100)
+				}
+			var head4List=head[headPage*4+3]
+			}	
+		}
+	}	
+}
+
+
+
+*/
+
+
+
+/*--------------기본얼굴 설정-------------*/
+
+function putOnCharL()
+{
+if(myFaceNum>0)
+	{
+	myFaceNum--
+	myFace=newFace[myFaceNum]
+	imgFace.src=myFace;
+	imgFace.onload=function()
+		{
+		putOnChar();
+		}
+	}
+}
+
+function putOnCharR()
+{
+if(myFaceNum<newFace.length-1)
+	{console.log(myFaceNum)
+	console.log(newFace.length)
+	myFaceNum++
+	myFace=newFace[myFaceNum]
+	imgFace.src=myFace;
+	imgFace.onload=function()
+		{
+		putOnChar();
+		}
+	}
+}
+
+
+
+/* 머리 */
+
+
+
+function putOnHead1()
+{
+if(head1List!="")
+	{
+	myHeadImg.src=head1List;
+	myHeadImg.onload=function()
+		{
+		putOnChar();
+		}
+	}
+}
+
+function putOnHead2()
+{
+if(head2List!="")
+	{
+	myHeadImg.src=head2List;
+	myHeadImg.onload=function()
+		{
+		putOnChar();
+		}
+	}
+}
+
+function putOnHead3()
+{
+if(head3List!="")
+	{
+	myHeadImg.src=head3List;
+	myHeadImg.onload=function()
+		{
+		putOnChar();
+		}
+	}
+}
+
+function putOnHead4()
+{
+if(head4List!="")
+	{
+	myHeadImg.src=head4List;
+	myHeadImg.onload=function()
+		{
+		putOnChar();
+		}
+	}
+}
+
+/*------------------------------------------------------------------------------------*/
+
+function putOnEyes1()
+{
+if(eyes1List!="")
+	{
+	myEyesImg.src=eyes1List;
+	myEyesImg.onload=function()
+		{
+		putOnChar();
+		}
+	}
+}
+
+function putOnEyes2()
+{
+if(eyes2List!="")
+	{
+	myEyesImg.src=eyes2List;
+	myEyesImg.onload=function()
+		{
+		putOnChar();
+		}
+	}
+}
+
+function putOnEyes3()
+{
+if(eyes3List!="")
+	{
+	myEyesImg.src=eyes3List;
+	myEyesImg.onload=function()
+		{
+		putOnChar();
+		}
+	}
+}
+
+function putOnEyes4()
+{
+if(eyes4List!="")
+	{
+	myEyesImg.src=eyes4List;
+	myEyesImg.onload=function()
+		{
+		putOnChar();
+		}
+	}
+}
+
+/*------------------------------------------------------------------------------------*/
+
+function putOnNose1()
+{
+if(nose1List!="")
+	{
+	myNoseImg.src=nose1List;
+	myNoseImg.onload=function()
+		{
+		putOnChar();
+		}
+	}
+}
+
+function putOnNose2()
+{
+if(nose2List!="")
+	{
+	myNoseImg.src=nose2List;
+	myNoseImg.onload=function()
+		{
+		putOnChar();
+		}
+	}
+}
+
+function putOnNose3()
+{
+if(nose3List!="")
+	{
+	myNoseImg.src=nose3List;
+	myNoseImg.onload=function()
+		{
+		putOnChar();
+		}
+	}
+}
+
+function putOnNose4()
+{
+if(nose4List!="")
+	{
+	myNoseImg.src=nose4List;
+	myNoseImg.onload=function()
+		{
+		putOnChar();
+		}
+	}
+}
+
+/*------------------------------------------------------------------------------------*/
+
+function putOnChin1()
+{
+if(chin1List!="")
+	{
+	myChinImg.src=chin1List;
+	myChinImg.onload=function()
+		{
+		putOnChar();
+		}
+	}
+}
+
+function putOnChin2()
+{
+if(chin2List!="")
+	{
+	myChinImg.src=chin2List;
+	myChinImg.onload=function()
+		{
+		putOnChar();
+		}
+	}
+}
+
+function putOnChin3()
+{
+if(chin3List!="")
+	{
+	myChinImg.src=chin3List;
+	myChinImg.onload=function()
+		{
+		putOnChar();
+		}
+	}
+}
+
+function putOnChin4()
+{
+if(chin4List!="")
+	{
+	myChinImg.src=chin4List;
+	myChinImg.onload=function()
+		{
+		putOnChar();
+		}
+	}
+}
+
+/*-----------------------------그림판에 선택한 것을 입력-------------------------------------------------------*/
+
+function putOnChar()
+{
+	charCtx.clearRect(0, 0, 700, 700);
+	char70Ctx.clearRect(0, 0, 70, 70);
+	charCtx.beginPath();
+	char70Ctx.beginPath();
+	charCtx.drawImage(imgFace,0,0,700,700);
+	char70Ctx.drawImage(imgFace,0,0,70,70);
+	if(myHeadImg!="")
+	{charCtx.drawImage(myHeadImg,0,0,700,700);
+	char70Ctx.drawImage(myHeadImg,0,0,70,70);}
+	if(myEyesImg!="")
+	{charCtx.drawImage(myEyesImg,0,0,700,700);
+	char70Ctx.drawImage(myEyesImg,0,0,70,70);}
+	if(myNoseImg!="")
+	{charCtx.drawImage(myNoseImg,0,0,700,700);
+	char70Ctx.drawImage(myNoseImg,0,0,70,70);}
+	if(myChinImg!="")
+	{charCtx.drawImage(myChinImg,0,0,700,700);
+	char70Ctx.drawImage(myChinImg,0,0,70,70);}
+}
+
+
+/*-----------------------------------------게임 관련 함수-------------------------------------------------*/
+/*-----------------------------------------게임 관련 함수-------------------------------------------------*/
+/*-----------------------------------------게임 관련 함수-------------------------------------------------*/
+/*-----------------------------------------게임 관련 함수-------------------------------------------------*/
+/*-----------------------------------------게임 관련 함수-------------------------------------------------*/
+
+var mapCanvas=document.getElementById("mapCanvas");
+var mapCtx=mapCanvas.getContext("2d");
+var gameCanvas=document.getElementById("gameCanvas");
+var gameCtx=gameCanvas.getContext("2d");
+
+//var mineXY=[];
+var upStage=1;
+
+//캐릭터(원)크기
+var charW=60;
+var charH=60;
+
+//캐릭터 기본위치
+var charX=0*70;
+var charY=9*70;
+
+
+//시작점
+var startX=0*70;
+var startY=9*70;
+
+//방향키
+var rightPressed = false;
+var leftPressed = false;
+var upPressed=false;
+var downPressed=false;
+
+ //  아이템 이미지 생성
+var itemImg1=new Image();   
+var itemImg2=new Image();
+var itemImg3=new Image();
+var itemImg4=new Image();
+
+//그림 배열
+var itemBY=['https://i.postimg.cc/y8VPJsgH/image.png','https://i.postimg.cc/zBRSmfMn/image.png','https://i.postimg.cc/v8J2ZJtY/image.png']
+
+/*-------------------------------------------------타이머-------------------------------------------------------*/
+let txtArea = document.querySelector('#myTimer');
+let start = document.querySelector('.start');
+let stop = document.querySelector('.stop');
+let state = false;
+let timer;
+
+let count; //제한시간 설정
+let timerId;
+let minutes, seconds;
+
+//숫자 앞에 0 채우기
+function leadingZeros(n, digits) { //digits: 자릿수
+  var zero = '';
+  n = n.toString();
+
+  if (n.length < digits) {
+    for (var i = 0; i < digits - n.length; i++)
+      zero += '0';
+  }
+  return zero + n;
+}
+
+timer = {
+  run: function (){
+    clearTimeout(timerId);
+    var minutes=(count-minutes)*60;
+    var seconds=Math.floor(parseInt(count)%60);
+    count--;
+    var numDisplay;
+    txtArea.textContent=count;
+    timerId = setTimeout(timer.run,  1000);
+    if (count===-1){
+	clearTimeout(timerId);												//시간초과 시 일어나는 일!!!!!!!!!!!
+	txtArea.textContent="GAME OVER";
+	gameOver();
+
+    }
+  },
+  stop: function(){
+    clearTimeout(timerId);
+  }
+}
+
+timerId = setTimeout(timer.run,  1000);
+
+
+/*--------------------------------게임 종료 버튼---------------------------------------------*/
+//타이머 일시정지
+document.getElementById("stop").addEventListener('click',function(event){
+  timer.stop();
+});
+
+//재시작 시 쓸 함수
+document.getElementById("start").addEventListener('click',function(event){
+  timer.stop();
+  setTimeout(timer.run,  1000);
+});
+
+/*---------------------------------------------게임 이벤트 내용 캔버스--------------------------------------------*/
+
+var eventCanvas = document.getElementById("eventCanvas");
+var eventCtx = eventCanvas.getContext("2d");
+
+/*----------------------------아이템 창 캔버스-------------------------------*/
+
+
+//아이템 창 캔버스
+var itemkanCanvas=document.getElementById("itemkanCanvas");
+var itemkanCtx=itemkanCanvas.getContext("2d");
+    itemkanCtx.font="20px 'NeoDunggeunmo Pro'";
+    //폰트를 직접 설치하지 않으면 폰트가 바뀌지 않는 문제가 있음
+    itemkanCtx.textAlign="center";
+    itemkanCtx.fillStyle="white";
+    itemkanCtx.fillText("아이템 목록",75,40);
+
+for(let i=0; i<4; i++){
+    itemkanCtx.rect(40,75+i*100,70,70);
+    itemkanCtx.strokeStyle="white";
+    itemkanCtx.fillText(i+1,55,100*i+95);
+    itemkanCtx.fillStyle="white";
+    itemkanCtx.stroke();
+}
+
+//아이템 1번칸 캔버스
+var itemCanvas1=document.getElementById("itemCanvas1");
+var itemCtx1=itemCanvas1.getContext("2d");
+
+//아이템 2번칸 캔버스
+var itemCanvas2=document.getElementById("itemCanvas2");
+var itemCtx2=itemCanvas2.getContext("2d");
+
+//아이템 3번칸 캔버스
+var itemCanvas3=document.getElementById("itemCanvas3");
+var itemCtx3=itemCanvas3.getContext("2d");
+
+//아이템 4번칸 캔버스
+var itemCanvas4=document.getElementById("itemCanvas4");
+var itemCtx4=itemCanvas4.getContext("2d");
+
+
+//아이템 1번칸 설명 캔버스
+var itemtextCanvas1 = document.getElementById("itemtextCanvas1");
+var itemtextCtx1 = itemtextCanvas1.getContext("2d");
+
+//아이템 2번칸 설명 캔버스
+var itemtextCanvas2 = document.getElementById("itemtextCanvas2");
+var itemtextCtx2 = itemtextCanvas2.getContext("2d");
+
+//아이템 3번칸 설명 캔버스
+var itemtextCanvas3 = document.getElementById("itemtextCanvas3");
+var itemtextCtx3 = itemtextCanvas3.getContext("2d");
+
+//아이템 4번칸 설명 캔버스
+var itemtextCanvas4 = document.getElementById("itemtextCanvas4");
+var itemtextCtx4 = itemtextCanvas4.getContext("2d");
+
+/*----------------------------------------tile추가---------------------------------*/
+
+
+
+var bg=["icons/나무1.png","icons/나무2.png","icons/나무3.png", "icons/벽돌1.png", "icons/벽돌2.png", "icons/벽돌3.png",
+"icons/초록1.png", "icons/초록2.png", "icons/초록3.png", "icons/회벽1.png", "icons/회벽2.png", "icons/회벽3.png", "icons/하늘1.png", "icons/하늘2.png"]
+var rd=Math.floor(Math.random()*bg.length)
+
+
+function mapBg()
+{
+var imgBg=new Image();
+imgBg.src=bg[rd];
+mapCtx.beginPath();
+imgBg.onload=function()
+	{
+	for (i=0; i<10; i++)
+		{
+		for (j=0; j<10; j++)
+			{
+			mapCtx.drawImage(imgBg, i*70,j*70,70,70);
+			}
+		}
+	startXY = startPortal();
+	finishXY= finishPlag();
+	}
+}
+
+
+/*---------------------지뢰심기 함수입니다.-----------------------------------------------------------------------------------
+함수 중에 리턴 mineXY있는 이유는 지뢰 설치 좌표를 전달하기 위함임				*/ 		//복사완료
+
+function easy1Mine()
+{console.log("이지마인 실행")
+//var img=new Image;
+//img.src="icons/지뢰.png";
+var mineXY=[[11,11]];   //여기는 똥 좌표입니다.
+var countMine=20;
+var howManyEasyLoad=7;	//길이 몇개인지 feat.꼭 갯수 안맞춰도 작동하게 했음                                 (^^짝궁)
+var randomMap=Math.floor(Math.random()*howManyEasyLoad);	//맵의 길을 랜덤으로 뽑기위한 랜덤변수.(^^짝궁)
+console.log(howManyEasyLoad);
+console.log(randomMap);
+//스테이지에 따라 지뢰갯수 정하기(1-5=20 개 6~ 40개)
+	if(upStage<=5)
+		{
+		var countMine=20
+		}
+	else if(upStage>5)
+		{
+		var countMine=40
+		}
+	else
+		{
+		var countMine=40
+		}
+	for(var o=0; o<countMine; o++) //지뢰좌표 설정
+	{
+	var XY=[Math.floor(Math.random()*10),Math.floor(Math.random()*10)];
+	for(var i=0; i<mineXY.length; i++)
+		{ // 길 종류(지뢰가 심기면 안되는 조건식 , 랜덤배정까지)  
+		if(randomMap==0)	
+			{	// 지뢰와 지뢰가 겹치지 않게		지뢰와 시작점이 겹치지 않게	지뢰와 끝점이 겹치지 않게  여기가 길
+			if(XY[0]==mineXY[i][0] && XY[1]==mineXY[i][1] || XY[0]==0 && XY[1]==9 || XY[0]==9 && XY[1]==0 || XY[0]==1 || XY[1]==1)
+				{
+				var XY=[Math.floor(Math.random()*10),Math.floor(Math.random()*10)];
+				var i=0;
+				}
+			}
+		else if(randomMap==1) 
+			{
+			if(XY[0]==mineXY[i][0] && XY[1]==mineXY[i][1] || XY[0]==0 && XY[1]==9 || XY[0]==9 && XY[1]==0 || XY[0]==8 || XY[1]==8)
+				{
+				var XY=[Math.floor(Math.random()*10),Math.floor(Math.random()*10)];
+				var i=0;
+				}
+			}
+		else if(randomMap==2)
+			{
+			if(XY[0]==mineXY[i][0] && XY[1]==mineXY[i][1] || XY[0]==0 && XY[1]==9 || XY[0]==9 && XY[1]==0 || XY[0]+XY[1]==8 || XY[0]+XY[1]==7)
+				{
+				var XY=[Math.floor(Math.random()*10),Math.floor(Math.random()*10)];
+				var i=0;
+				}
+			}
+		else if(randomMap==3)
+			{
+			if(XY[0]==mineXY[i][0] && XY[1]==mineXY[i][1] || XY[0]==0 && XY[1]==9 || XY[0]==9 && XY[1]==0 || XY[0]+XY[1]==10 || XY[0]+XY[1]==11)
+				{
+				var XY=[Math.floor(Math.random()*10),Math.floor(Math.random()*10)];
+				var i=0;
+				}
+			}
+		else if(randomMap==4)
+			{
+			if(XY[0]==mineXY[i][0] && XY[1]==mineXY[i][1] || XY[0]==0 && XY[1]==9 || XY[0]==9 && XY[1]==0 || XY[0]==1 || XY[1]==0)
+				{
+				var XY=[Math.floor(Math.random()*10),Math.floor(Math.random()*10)];
+				var i=0;
+				}
+			}
+		else if(randomMap==5)
+			{
+			if(XY[0]==mineXY[i][0] && XY[1]==mineXY[i][1] || XY[0]==0 && XY[1]==9 || XY[0]==9 && XY[1]==0 || XY[0]==3 || XY[1]==8 || XY[1]==0)
+				{
+				var XY=[Math.floor(Math.random()*10),Math.floor(Math.random()*10)];
+				var i=0;
+				}
+			}
+		else	
+			{
+			if(XY[0]==mineXY[i][0] && XY[1]==mineXY[i][1] || XY[0]==0 && XY[1]==9 || XY[0]==9 && XY[1]==0 || XY[0]==9 || XY[1]==1 ||XY[0]==0)
+				{
+				var XY=[Math.floor(Math.random()*10),Math.floor(Math.random()*10)];
+				var i=0;
+				}
+			}
+		}
+	mineXY.push(XY);
+
+	}
+console.log(mineXY.shift()) //똥 좌표 빠지는지 확인
+/*
+img.onload=function()
+	{
+	for(let p=0; p<countMine; p++) //지뢰배설 지뢰의 개수바꾸고 싶으면 i<00 을 바꿔주면 됨
+		{
+		gameCtx.drawImage(img,mineXY[p][0]*70,mineXY[p][1]*70,70,70); //여기에 똥 좌표를 빼고나서 시작할 수 있도록 만들었습니다.
+		}
+	}
+*/
+return mineXY;
+}
+
+/*-------------------------------------------------------노말 마인 맵------------------------------------------------------*/
+					
+
+
+function normal1Mine()
+{
+//var img=new Image;
+//img.src="icons/지뢰.png";
+var mineXY=[[11,11]];   //여기는 똥 좌표입니다.
+var countMine=40;
+var howManyEasyLoad=4;	//길이 몇개인지 feat.꼭 갯수 안맞춰도 작동하게 했음                                 (^^짝궁)
+var randomMap=Math.floor(Math.random()*howManyEasyLoad);	//맵의 길을 랜덤으로 뽑기위한 랜덤변수.(^^짝궁)
+console.log(howManyEasyLoad);
+console.log(randomMap);
+//스테이지에 따라 지뢰갯수 정하기(1-5=20 개 6~ 40개)
+	if(upStage<=5)
+		{
+		var countMine=20
+		}
+	else if(upStage>5)
+		{
+		var countMine=40
+		}
+	else
+		{
+		var countMine=40
+		}
+	for(var o=0; o<countMine; o++) //지뢰좌표 설정
+	{
+	var XY=[Math.floor(Math.random()*10),Math.floor(Math.random()*10)];
+	for(var i=0; i<mineXY.length; i++)
+		{ // 길 종류(지뢰가 심기면 안되는 조건식 , 랜덤배정까지)
+		if(randomMap==0)
+			{
+			if(XY[0]==mineXY[i][0] && XY[1]==mineXY[i][1] || XY[0]==0 && XY[1]==9 || XY[0]==9 && XY[1]==0 || XY[0]==1 || XY[1]==1)
+				{
+				var XY=[Math.floor(Math.random()*10),Math.floor(Math.random()*10)];
+				var i=0;
+				}
+			}
+		else if(randomMap==1)
+			{
+			if(XY[0]==mineXY[i][0] && XY[1]==mineXY[i][1] || XY[0]==0 && XY[1]==9 || XY[0]==9 && XY[1]==0 || XY[0]==8 || XY[1]==8)
+				{
+				var XY=[Math.floor(Math.random()*10),Math.floor(Math.random()*10)];
+				var i=0;
+				}
+			}
+		else if(randomMap==2)
+			{
+			if(XY[0]==mineXY[i][0] && XY[1]==mineXY[i][1] || XY[0]==0 && XY[1]==9 || XY[0]==9 && XY[1]==0 || XY[0]+XY[1]==8 || XY[0]+XY[1]==9)
+				{
+				var XY=[Math.floor(Math.random()*10),Math.floor(Math.random()*10)];
+				var i=0;
+				}
+			}
+		else if(randomMap==3)
+			{
+			if(XY[0]==mineXY[i][0] && XY[1]==mineXY[i][1] || XY[0]==0 && XY[1]==9 || XY[0]==9 && XY[1]==0 || XY[0]+XY[1]==9 || XY[0]+XY[1]==10)
+				{
+				var XY=[Math.floor(Math.random()*10),Math.floor(Math.random()*10)];
+				var i=0;
+				}
+			}
+		else	
+			{
+			if(XY[0]==mineXY[i][0] && XY[1]==mineXY[i][1] || XY[0]==0 && XY[1]==9 || XY[0]==9 && XY[1]==0 || XY[0]==0 || XY[1]==7 || XY[0]==9)
+				{
+				var XY=[Math.floor(Math.random()*10),Math.floor(Math.random()*10)];
+				var i=0;
+				}
+			}
+		}
+	mineXY.push(XY);
+
+	}
+console.log(mineXY.shift()) //똥 좌표 빠지는지 확인
+/*
+img.onload=function()
+	{
+	for(let p=0; p<countMine; p++) //지뢰배설 지뢰의 개수바꾸고 싶으면 i<00 을 바꿔주면 됨
+		{
+		gameCtx.drawImage(img,mineXY[p][0]*70,mineXY[p][1]*70,70,70); //여기에 똥 좌표를 빼고나서 시작할 수 있도록 만들었습니다.
+		}
+	}
+*/
+return mineXY;
+}
+
+/*-------------------------------------------------------------------------------------------------------------*/
+					//하드 마인 맵
+
+
+function hard1Mine()
+{
+// var img=new Image;
+// img.src="icons/지뢰.png";
+var mineXY=[[11,11]];   //여기는 똥 좌표입니다.
+var countMine=20;
+var howManyEasyLoad=4;	//길이 몇개인지 feat.꼭 갯수 안맞춰도 작동하게 했음                                 (^^짝궁)
+var randomMap=Math.floor(Math.random()*howManyEasyLoad);	//맵의 길을 랜덤으로 뽑기위한 랜덤변수.(^^짝궁)
+console.log(howManyEasyLoad);
+console.log(randomMap);
+//스테이지에 따라 지뢰갯수 정하기(1-5=20 개 6~ 40개)
+	if(upStage<=5)
+		{
+		var countMine=20
+		}
+	else if(upStage>5)
+		{
+		var countMine=40
+		}
+	else
+		{
+		var countMine=40
+		}
+	for(var o=0; o<countMine; o++) //지뢰좌표 설정
+	{
+	var XY=[Math.floor(Math.random()*10),Math.floor(Math.random()*10)];
+	for(var i=0; i<mineXY.length; i++)
+		{ // 길 종류(지뢰가 심기면 안되는 조건식 , 랜덤배정까지)
+		if(randomMap==0)
+			{
+			if(XY[0]==mineXY[i][0] && XY[1]==mineXY[i][1] || XY[0]==0 && XY[1]==9 || XY[0]==9 && XY[1]==0 || XY[0]==1 || XY[1]==1)
+				{
+				var XY=[Math.floor(Math.random()*10),Math.floor(Math.random()*10)];
+				var i=0;
+				}
+			}
+		else if(randomMap==1)
+			{
+			if(XY[0]==mineXY[i][0] && XY[1]==mineXY[i][1] || XY[0]==0 && XY[1]==9 || XY[0]==9 && XY[1]==0 || XY[0]==8 || XY[1]==8)
+				{
+				var XY=[Math.floor(Math.random()*10),Math.floor(Math.random()*10)];
+				var i=0;
+				}
+			}
+		else if(randomMap==2)
+			{
+			if(XY[0]==mineXY[i][0] && XY[1]==mineXY[i][1] || XY[0]==0 && XY[1]==9 || XY[0]==9 && XY[1]==0 || XY[0]+XY[1]==8 || XY[0]+XY[1]==9)
+				{
+				var XY=[Math.floor(Math.random()*10),Math.floor(Math.random()*10)];
+				var i=0;
+				}
+			}
+		else if(randomMap==3)
+			{
+			if(XY[0]==mineXY[i][0] && XY[1]==mineXY[i][1] || XY[0]==0 && XY[1]==9 || XY[0]==9 && XY[1]==0 || XY[0]+XY[1]==9 || XY[0]+XY[1]==10)
+				{
+				var XY=[Math.floor(Math.random()*10),Math.floor(Math.random()*10)];
+				var i=0;
+				}
+			}
+		else	
+			{
+			if(XY[0]==mineXY[i][0] && XY[1]==mineXY[i][1] || XY[0]==0 && XY[1]==9 || XY[0]==9 && XY[1]==0 || XY[0]==0 || XY[1]==7 || XY[0]==9)
+				{
+				var XY=[Math.floor(Math.random()*10),Math.floor(Math.random()*10)];
+				var i=0;
+				}
+			}
+		}
+	mineXY.push(XY);
+
+	}
+console.log(mineXY.shift()) //똥 좌표 빠지는지 확인
+/*
+img.onload=function()
+	{
+	for(let p=0; p<countMine; p++) //지뢰배설 지뢰의 개수바꾸고 싶으면 i<00 을 바꿔주면 됨
+		{
+		gameCtx.drawImage(img,mineXY[p][0]*70,mineXY[p][1]*70,70,70); //여기에 똥 좌표를 빼고나서 시작할 수 있도록 만들었습니다.
+		}
+	}
+*/
+return mineXY;
+}
+
+/*-----------------시작 포탈----------------------------------------------------------------------*/
+
+
+function startPortal()
+{
+mapCtx.beginPath();
+var startXY=[]
+var portalImg=["icons/포탈1.png","icons/포탈2.png","icons/포탈3.png","icons/포탈4.png"];
+var img=new Image; //i 말고 I 였음
+if(upStage<=5)
+{var stage=0;}
+else if(upStage<=10)
+{var stage=1;}
+else if(upStage<=15)
+{var stage=2;}
+else if(upStage>15)
+{var stage=3;}
+else
+{var stage=3;}
+img.src=portalImg[stage];
+var XY=[0,9];
+startXY.push(XY);
+img.onload=function()
+{
+mapCtx.drawImage(img,XY[0]*70,XY[1]*70,70,70);
+}
+return startXY;
+console.log('시작포탈2');
+}
+
+/*-----------------------------피니시 깃발--------------------------------------------------------------------------------*/
+
+function finishPlag()
+	{
+	mapCtx.beginPath();
+	var finishXY=[]
+	var imgMap=new Image; //i 말고 I 였음
+	imgMap.src="icons/finish.png";
+	var XY=[9,0];
+	finishXY.push(XY);
+	imgMap.onload=function()
+		{
+		mapCtx.drawImage(imgMap,XY[0]*70,XY[1]*70,70,70);
+		}
+	}
+
+
+/*-----------------------------------------아이템 함수--------------------------------------------------------------------*/
+
+function randomItem()
+{
+mapCtx.beginPath();
+var itemXY=[];
+var luckyRate=Math.floor(Math.random()*10); //아이템2개일 확률
+var countItem=12;
+var img=new Image;
+
+if(luckyRate==0) //랜덤숫자가 0이 나오면 아이템이 2개 생성
+	{
+	var countItem=2;
+	}
+else if(luckyRate>=1)
+	{
+	var countItem=1;
+	}
+else
+	{
+	var countItem=1;
+	}
+img.src="icons/랜덤박스.png";
+	for(var j=0; j<countItem; j++) //지뢰좌표 설정
+	{
+	var XY=[Math.floor(Math.random()*10),Math.floor(Math.random()*10)];
+	for(var i=0; i<mineXY.length; i++)
+		{ // 여기가 아이템이 생기면 심기면 안되는 위치 지정 조건식
+		if(XY[0]==mineXY[i][0] && XY[1]==mineXY[i][1])
+			{
+			var XY=[Math.floor(Math.random()*10),Math.floor(Math.random()*10)];
+			var i=0;
+			}
+		}
+	
+//같은 위치에 아이템 2개 안되도록 조건식
+	for(var n=0; n<itemXY.length; n++)
+		{if(XY[0]==itemXY[n][0] && XY[1]==itemXY[n][1] || XY[0]==0 && XY[1]==9 || XY[0]==9 && XY[1]==0)
+			{
+			var XY=[Math.floor(Math.random()*10),Math.floor(Math.random()*10)];
+			var n=0;
+			}
+		}
+	itemXY.push(XY);
+	}
+img.onload=function()
+	{
+	for(let p=0; p<countItem; p++) //아이템 설치 개수바꾸고 싶으면 i<00 을 바꿔주면 됨
+		{
+		gameCtx.drawImage(img,itemXY[p][0]*70,itemXY[p][1]*70,70,70);
+		}
+	}
+return itemXY;
+}
+
+/*-------------------------------------아이템 추가시키는 함수----------------------------------*/
+var itemUseMine=[]    //  돋보기를 사용해서 나타난 지뢰 좌표
+
+
+function itemGet(){
+	for(let g=0; g<itemXY.length; g++)
+	{
+		//아이템이랑 캐릭터의 위치가 같을 때
+		if(itemXY[g][0]*70==charX && itemXY[g][1]*70==charY)
+		{
+            var itemgot=new Image;
+            //이 밑 부분 0~2로 바꾸면 특정 아이템만 나옴 0.돋보기 1.망원경 2.독약
+            itemgot.src=itemBY[Math.floor(Math.random()*3)]; //Math.floor(Math.random()*3)
+            itemgot.onload=function()
+            {
+                gameCtx.drawImage(itemgot, itemXY[g][0], itemXY[g][1], 50, 50);
+            }
+            itemXY[g][0]=99999999;
+            itemXY[g][1]=99999999;
+			//첫번째 칸에 아이템 추가
+			if(itemImg1.src=="" && (itemgot.src==itemBY[0] || itemgot.src==itemBY[1]))
+			{
+				itemImg1.onload=function()
+				{
+					itemCtx1.drawImage(itemImg1, 0, 0, 50, 50);
+				}
+				itemImg1.src=itemgot.src;
+
+			}
+			//두번째 칸에 아이템 추가
+			else if(itemImg1.src!="" && itemImg2.src=="" && (itemgot.src==itemBY[0] || itemgot.src==itemBY[1]))
+			{
+				itemImg2.onload=function()
+				{
+					itemCtx2.drawImage(itemImg2, 0, 0, 50, 50);
+				}
+				itemImg2.src=itemgot.src;
+			}
+			//세번째 칸에 아이템 추가
+			else if(itemImg1.src!="" && itemImg2.src!="" &&  itemImg3.src=="" && (itemgot.src==itemBY[0] || itemgot.src==itemBY[1]))
+			{
+				itemImg3.onload=function()
+				{
+					itemCtx3.drawImage(itemImg3, 0, 0, 50, 50);
+				}
+				itemImg3.src=itemgot.src;
+			}
+			//네번째 칸에 아이템 추가
+			else if(itemImg1.src!="" && itemImg2.src!="" && itemImg3.src!="" &&  itemImg4.src=="" && (itemgot.src==itemBY[0] || itemgot.src==itemBY[1]))
+			{
+				itemImg4.onload=function()
+				{
+					itemCtx4.drawImage(itemImg4, 0, 0, 50, 50);
+				}
+				itemImg4.src=itemgot.src;
+			}
+			//아이템창이 꽉 찼을 때, 새로운 아이템을 흭득하면 첫번째 창 아이템을 지우고 4번째 창에 새롭게 흭득한 아이템 추가
+			else if(itemImg1.src!="" && itemImg2.src!="" && itemImg3.src!="" &&  itemImg4.src!="" && (itemgot.src==itemBY[0] || itemgot.src==itemBY[1]))
+			{
+                itemCtx1.clearRect(0, 0, 50, 50);    //  아이템 지우기
+                itemImg1=itemImg2    //  아이템 효과 위로 옮김
+                itemCtx1.drawImage(itemImg2, 0, 0, 50, 50);    //  아이템 이미지 위로 옮김
+                itemCtx2.clearRect(0, 0, 50, 50);
+                itemImg2=itemImg3
+                itemCtx2.drawImage(itemImg3, 0, 0, 50, 50);
+                itemCtx3.clearRect(0, 0, 50, 50);
+                itemImg3=itemImg4
+                itemCtx3.drawImage(itemImg4, 0, 0, 50, 50);
+                itemCtx4.clearRect(0, 0, 50, 50);
+                itemImg4=new Image();
+                itemImg4.onload=function()
+                {
+                   itemCtx4.drawImage(itemImg4, 0, 0, 50, 50);
+                }
+                itemImg4.src=itemgot.src;
+			}
+	//돋보기를 흭득했을 때 실행
+         if(itemgot.src==itemBY[0])
+         {
+                eventCtx.fillStyle = "skyblue";
+                eventCtx.fillRect(0, 0, 250, 100);
+                eventCtx.font="30px 'NeoDunggeunmo Pro'";
+                eventCtx.fillStyle="black"
+                eventCtx.fillText("돋보기 흭득", 50, 25)
+                eventCtx.font="21.5px 'NeoDunggeunmo Pro'";
+                eventCtx.fillText("내 주변 1칸에 있는 ", 25, 60)
+                eventCtx.fillText("지뢰를 확인시켜 준다", 25, 80)
+                setTimeout(function () {eventCtx.clearRect(0, 0, 250, 100)}, 1500);
+         }
+         //망원경을 흭득했을 때 실행
+         else if(itemgot.src==itemBY[1])
+         {
+                eventCtx.fillStyle = "skyblue";
+                eventCtx.fillRect(0, 0, 250, 100);
+                eventCtx.font="30px 'NeoDunggeunmo Pro'";
+                eventCtx.fillStyle="black"
+                eventCtx.fillText("망원경 흭득", 40, 25)
+                eventCtx.font="21.5px 'NeoDunggeunmo Pro'";
+                eventCtx.fillText("모든 지뢰를 1초간 ", 40, 60)
+                eventCtx.fillText("보여준다", 40, 80)
+                setTimeout(function () {eventCtx.clearRect(0, 0, 250, 100)}, 1500);
+         }
+            //독약을 흭득했을 때 실행
+            else if(itemgot.src==itemBY[2])
+            {
+                eventCtx.fillStyle = "skyblue";
+                eventCtx.fillRect(0, 0, 250, 100);
+                eventCtx.font="30px 'NeoDunggeunmo Pro'";
+                eventCtx.fillStyle="black"
+                eventCtx.fillText("독약 흭득", 50, 25)
+                eventCtx.font="21.5px 'NeoDunggeunmo Pro'";
+                eventCtx.fillText("20초 동안 방향키가 ", 35, 60)
+                eventCtx.fillText("반대로 작동한다", 35, 80)
+                setTimeout(function () {eventCtx.clearRect(0, 0, 250, 100)}, 1500);
+
+                document.removeEventListener("keydown", keyDownHandler, false);
+                window.onkeydown = function (e)
+                {
+                    gameCtx.clearRect(charX, charY, 70, 70)
+                    charMotion()
+                    switch(e.key)
+                    {
+                        case "ArrowDown" :
+                            e.preventDefault();
+                            charY-=70;
+                            if(charY<0)
+                            {
+                                charY=0
+                            }
+                            break;
+                        case "ArrowUp" :
+                            e.preventDefault();
+                            charY+=70;
+                            if(charY>630)
+                            {
+                                charY=630
+                            }
+                            break;
+                        case "ArrowLeft" :
+                            e.preventDefault();
+                            charX+=70;
+                            if(charX>630)
+                            {
+                                charX=630
+                            }
+                            break;
+                        case "ArrowRight" :
+                            e.preventDefault();
+                            charX-=70;
+                            if(charX<0)
+                            {
+                                charX=0
+                            }
+                            break
+                        case "1" :
+                            itemUse(itemImg1)
+                            itemCtx1.clearRect(0, 0, 50, 50);    //  1~4번 칸 아이템 지우기
+                            itemImg1=itemImg2    //  아이템 효과 위로 옮김
+                            itemCtx1.drawImage(itemImg2, 0, 0, 50, 50);    //  아이템 이미지 위로 옮김
+                            itemCtx2.clearRect(0, 0, 50, 50);
+                            itemImg2=itemImg3
+                            itemCtx2.drawImage(itemImg3, 0, 0, 50, 50);
+                            itemCtx3.clearRect(0, 0, 50, 50);
+                            itemImg3=itemImg4
+                            itemCtx3.drawImage(itemImg4, 0, 0, 50, 50);
+                            itemCtx4.clearRect(0, 0, 50, 50);
+                            itemImg4=new Image();
+                            break;
+                        case "2" :
+                            itemUse(itemImg2)
+                            itemCtx2.clearRect(0, 0, 50, 50);    //  2~4번 칸 아이템 지우기
+                            itemImg2=itemImg3    //  아이템 효과 위로 옮김
+                            itemCtx2.drawImage(itemImg3, 0, 0, 50, 50);    //  아이템 이미지 위로 옮김
+                            itemCtx3.clearRect(0, 0, 50, 50);
+                            itemImg3=itemImg4
+                            itemCtx3.drawImage(itemImg4, 0, 0, 50, 50);
+                            itemCtx4.clearRect(0, 0, 50, 50);
+                            itemImg4=new Image();
+                            break;
+                        case "3" :
+                            itemUse(itemImg3)
+                            itemCtx3.clearRect(0, 0, 50, 50);    //  3~4번 칸 아이템 지우기
+                            itemImg3=itemImg4    //  아이템 효과 위로 옮김
+                            itemCtx3.drawImage(itemImg4, 0, 0, 50, 50);    //  아이템 이미지 위로 옮김
+                            itemCtx4.clearRect(0, 0, 50, 50);
+                            itemImg4=new Image();
+                            break;
+                        case "4" :
+                            itemUse(itemImg4)
+                            itemCtx4.clearRect(0, 0, 50, 50);    //  4번 칸 아이템 지우기
+                            itemImg4=new Image();
+                            break;
+                    }
+                    char()
+                }
+                //독약 타이머 끝났을 때 실행
+                setTimeout( function ()
+                {
+                    if(modal.style.display=="block")
+                    {
+                        window.onkeydown="";
+                    }
+                    else
+                    {
+                    window.onkeydown="";
+                    itemButton();
+                    document.addEventListener("keydown", keyDownHandler, false);
+                    }
+
+                    //점수 창 열려있으면 못 움직임
+
+                }, 20000);
+
+            }
+		}
+	}
+}
+
+itemButton()
+//아이템을 사용했을 때 아이템 칸의 변화
+function itemButton(){
+window.onkeydown = function (e)
+{
+	switch(e.key)
+	{
+		case "1" :
+		    itemUse(itemImg1)
+			itemCtx1.clearRect(0, 0, 50, 50);    //  1~4번 칸 아이템 지우기
+			itemImg1=itemImg2    //  아이템 효과 위로 옮김
+			itemCtx1.drawImage(itemImg2, 0, 0, 50, 50);    //  아이템 이미지 위로 옮김
+			itemCtx2.clearRect(0, 0, 50, 50);
+			itemImg2=itemImg3
+			itemCtx2.drawImage(itemImg3, 0, 0, 50, 50);
+			itemCtx3.clearRect(0, 0, 50, 50);
+			itemImg3=itemImg4
+			itemCtx3.drawImage(itemImg4, 0, 0, 50, 50);
+			itemCtx4.clearRect(0, 0, 50, 50);
+			itemImg4=new Image();
+			break;
+		case "2" :
+		    itemUse(itemImg2)
+			itemCtx2.clearRect(0, 0, 50, 50);    //  2~4번 칸 아이템 지우기
+			itemImg2=itemImg3    //  아이템 효과 위로 옮김
+			itemCtx2.drawImage(itemImg3, 0, 0, 50, 50);    //  아이템 이미지 위로 옮김
+			itemCtx3.clearRect(0, 0, 50, 50);
+			itemImg3=itemImg4
+			itemCtx3.drawImage(itemImg4, 0, 0, 50, 50);
+			itemCtx4.clearRect(0, 0, 50, 50);
+			itemImg4=new Image();
+			break;
+		case "3" :
+			itemUse(itemImg3)
+			itemCtx3.clearRect(0, 0, 50, 50);    //  3~4번 칸 아이템 지우기
+			itemImg3=itemImg4    //  아이템 효과 위로 옮김
+			itemCtx3.drawImage(itemImg4, 0, 0, 50, 50);    //  아이템 이미지 위로 옮김
+			itemCtx4.clearRect(0, 0, 50, 50);
+			itemImg4=new Image();
+			break;
+		case "4" :
+		    itemUse(itemImg4)
+			itemCtx4.clearRect(0, 0, 50, 50);    //  4번 칸 아이템 지우기
+			itemImg4=new Image();
+			break;
+		}
+	}
+}
+
+/*------------------------------아이템 사용 효과-------------------------------*/
+
+//아이템 사용 효과
+function itemUse(itemImg)
+{
+    //돋보기 사용 효과
+    if(itemImg.src==itemBY[0])
+        {
+        var copyIUM
+        var mineWhere=[]
+        var charWhere=[[(charX-70)/70,(charY-70)/70],[(charX)/70,(charY-70)/70],[(charX+70)/70,(charY-70)/70],[(charX-70)/70,(charY)/70],[(charX+70)/70,(charY)/70],[(charX-70)/70,(charY+70)/70],[(charX)/70,(charY+70)/70],[(charX+70)/70,(charY+70)/70]]
+        for(let j=0; j<charWhere.length; j++)
+        {
+            for(let i=0; i<mineXY.length; i++)
+            {
+                if(charWhere[j][0]==mineXY[i][0] && charWhere[j][1]==mineXY[i][1])
+                {
+                    mineWhere.push(mineXY[i])
+                    for(let z = 0; z < mineWhere.length; z++)
+                    {
+                        for(let zz=0; zz<itemUseMine.length; zz++)
+                        {
+                            if(mineWhere[z] === itemUseMine[zz])
+                            {
+                                mineWhere.splice(z, 1);
+                                z--;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if(mineWhere.length==0)    //  주변에 지뢰 없으면 실행
+        {
+        }
+        else    //  주변에 지뢰 하나 이상 있으면 실행
+        {
+            mine1kan=mineWhere[Math.floor(Math.random()*mineWhere.length)]
+            itemUseMine.push(mine1kan)
+            let mineImg=new Image()
+            mineImg.onload=function()
+            {
+                gameCtx.drawImage(mineImg, mine1kan[0]*70, mine1kan[1]*70, 70, 70)
+            }
+            mineImg.src="icons/지뢰.png"
+        }
+    }
+    //망원경 사용 효과
+    if(itemImg.src==itemBY[1])
+    {
+        var countMine=mineXY.length;
+        var itemUseMineimg=new Image;
+        itemUseMineimg.src="icons/지뢰.png";
+        itemUseMineimg.onload=function()
+	    {
+	        for(let p=0; p<countMine; p++)
+	       	{
+	    	    gameCtx.drawImage(itemUseMineimg, mineXY[p][0]*70, mineXY[p][1]*70, 70, 70);
+	    	}
+	    }
+        setTimeout(function()
+        {
+            for(let d=0; d<mineXY.length; d++)
+            {
+                gameCtx.clearRect(mineXY[d][0]*70, mineXY[d][1]*70, 70, 70)
+            }
+            if(itemUseMine.length==0)
+            {
+            }
+            else
+            {
+                var mgImg=new Image;
+                mgImg.src="icons/지뢰.png";
+                mgImg.onload=function()
+                {
+                    for(let u=0; u<itemUseMine.length; u++)
+                    {
+                        gameCtx.drawImage(mgImg, itemUseMine[u][0]*70, itemUseMine[u][1]*70, 70, 70);
+                    }
+                }
+            }
+	    }, 1000);    //  망원경 사용 시 지뢰 위치 잠깐 보여줄 시간 1000=1초
+    }
+}
+
+/*-----------------------아이템 hover관련------------------------------------------------ */
+
+//1번째 칸 아이템에 마우스 갖다댔을 때
+itemCanvas1.addEventListener("mouseover", itemOver1);
+function itemOver1()
+{
+	//돋보기 아이템 설명
+	if(itemImg1.src==itemBY[0])
+	{
+
+		itemtextCtx1.fillStyle = "skyblue";
+		itemtextCtx1.fillRect(0, 0, 250, 100);
+		itemtextCtx1.font="30px 'NeoDunggeunmo Pro'";
+		itemtextCtx1.fillStyle="black"
+		itemtextCtx1.fillText("돋보기", 50, 25)
+		itemtextCtx1.font="20px 'NeoDunggeunmo Pro'";
+		itemtextCtx1.fillText("내 주변 1칸에 있는 ", 5, 60)
+		itemtextCtx1.fillText("지뢰를 확인시켜 준다", 5, 80)
+	}
+
+	//망원경 아이템 설명
+	else if(itemImg1.src==itemBY[1])
+	{
+
+		itemtextCtx1.fillStyle = "skyblue";
+		itemtextCtx1.fillRect(0, 0, 250, 100);
+		itemtextCtx1.font="30px 'NeoDunggeunmo Pro'";
+		itemtextCtx1.fillStyle="black"
+		itemtextCtx1.fillText("망원경", 50, 25)
+		itemtextCtx1.font="20px 'NeoDunggeunmo Pro'";
+		itemtextCtx1.fillText("모든 지뢰를 1초간", 15, 60)
+		itemtextCtx1.fillText("보여준다", 15, 80)
+	}
+}
+
+//1번째 칸 아이템에 마우스 땔 때
+itemCanvas1.addEventListener("mouseout", itemOut1);
+function itemOut1()
+{
+	itemtextCtx1.clearRect(0, 0, 250, 100);    //  설명 지우기
+}
+
+
+//2번째 칸 아이템에 마우스 갖다댔을 때
+itemCanvas2.addEventListener("mouseover", itemOver2);
+function itemOver2()
+{
+	//돋보기 아이템 설명
+	if(itemImg2.src==itemBY[0])
+	{
+
+		itemtextCtx2.fillStyle = "skyblue";
+		itemtextCtx2.fillRect(0, 0, 250, 100);
+		itemtextCtx2.font="30px 'NeoDunggeunmo Pro'";
+		itemtextCtx2.fillStyle="black"
+		itemtextCtx2.fillText("돋보기", 50, 25)
+		itemtextCtx2.font="20px 'NeoDunggeunmo Pro'";
+		itemtextCtx2.fillText("내 주변 1칸에 있는 ", 5, 60)
+		itemtextCtx2.fillText("지뢰를 확인시켜 준다", 5, 80)
+	}
+
+	//망원경 아이템 설명
+	else if(itemImg2.src==itemBY[1])
+	{
+
+		itemtextCtx2.fillStyle = "skyblue";
+		itemtextCtx2.fillRect(0, 0, 250, 100);
+		itemtextCtx2.font="30px 'NeoDunggeunmo Pro'";
+		itemtextCtx2.fillStyle="black"
+		itemtextCtx2.fillText("망원경", 50, 25)
+		itemtextCtx2.font="20px 'NeoDunggeunmo Pro'";
+		itemtextCtx2.fillText("모든 지뢰를 1초간", 15, 60)
+		itemtextCtx2.fillText("보여준다", 15, 80)
+	}
+}
+
+//2번째 칸 아이템에 마우스 땔 때
+itemCanvas2.addEventListener("mouseout", itemOut2);
+function itemOut2()
+{
+	itemtextCtx2.clearRect(0, 0, 250, 100);    //  설명 지우기
+}
+
+
+//3번째 칸 아이템에 마우스 갖다댔을 때
+itemCanvas3.addEventListener("mouseover", itemOver3);
+function itemOver3()
+{
+	//돋보기 아이템 설명
+	if(itemImg3.src==itemBY[0])
+	{
+
+		itemtextCtx3.fillStyle = "skyblue";
+		itemtextCtx3.fillRect(0, 0, 250, 100);
+		itemtextCtx3.font="30px 'NeoDunggeunmo Pro'";
+		itemtextCtx3.fillStyle="black"
+		itemtextCtx3.fillText("돋보기", 50, 25)
+		itemtextCtx3.font="20px 'NeoDunggeunmo Pro'";
+		itemtextCtx3.fillText("내 주변 1칸에 있는 ", 5, 60)
+		itemtextCtx3.fillText("지뢰를 확인시켜 준다", 5, 80)
+	}
+
+	//망원경 아이템 설명
+	else if(itemImg3.src==itemBY[1])
+	{
+
+		itemtextCtx3.fillStyle = "skyblue";
+		itemtextCtx3.fillRect(0, 0, 250, 100);
+		itemtextCtx3.font="30px 'NeoDunggeunmo Pro'";
+		itemtextCtx3.fillStyle="black"
+		itemtextCtx3.fillText("망원경", 50, 25)
+		itemtextCtx3.font="20px 'NeoDunggeunmo Pro'";
+		itemtextCtx3.fillText("모든 지뢰를 1초간", 15, 60)
+		itemtextCtx3.fillText("보여준다", 15, 80)
+	}
+}
+
+//3번째 칸 아이템에 마우스 땔 때
+itemCanvas3.addEventListener("mouseout", itemOut3);
+function itemOut3()
+{
+	itemtextCtx3.clearRect(0, 0, 250, 100);    //  설명 지우기
+}
+
+
+//4번째 칸 아이템에 마우스 갖다댔을 때
+itemCanvas4.addEventListener("mouseover", itemOver4);
+function itemOver4()
+{
+	//돋보기 아이템 설명
+	if(itemImg4.src==itemBY[0])
+	{
+
+		itemtextCtx4.fillStyle = "skyblue";
+		itemtextCtx4.fillRect(0, 0, 250, 100);
+		itemtextCtx4.font="30px 'NeoDunggeunmo Pro'";
+		itemtextCtx4.fillStyle="black"
+		itemtextCtx4.fillText("돋보기", 50, 25)
+		itemtextCtx4.font="20px 'NeoDunggeunmo Pro'";
+		itemtextCtx4.fillText("내 주변 1칸에 있는 ", 5, 60)
+		itemtextCtx4.fillText("지뢰를 확인시켜 준다", 5, 80)
+	}
+
+	//망원경 아이템 설명
+	else if(itemImg4.src==itemBY[1])
+	{
+
+		itemtextCtx4.fillStyle = "skyblue";
+		itemtextCtx4.fillRect(0, 0, 250, 100);
+		itemtextCtx4.font="30px 'NeoDunggeunmo Pro'";
+		itemtextCtx4.fillStyle="black"
+		itemtextCtx4.fillText("망원경", 50, 25)
+		itemtextCtx4.font="20px 'NeoDunggeunmo Pro'";
+		itemtextCtx4.fillText("모든 지뢰를 1초간", 15, 60)
+		itemtextCtx4.fillText("보여준다", 15, 80)
+	}
+}
+
+//4번째 칸 아이템에 마우스 땔 때
+itemCanvas4.addEventListener("mouseout", itemOut4);
+function itemOut4()
+{
+	itemtextCtx4.clearRect(0, 0, 250, 100);    //  설명 지우기
+}
+
+
+/*----------new map함수-----------------------------------*/
+
+function newMap()
+{
+if(upStage<=5)
+	{
+	mapBg();
+	mineXY=	easy1Mine();
+	//itemXY= randomItem();
+	}
+else if(upStage<=10)
+	{
+	mapBg();
+	mineXY=	normal1Mine();
+	//itemXY= randomItem();
+	}
+else if(upStage>10)
+	{
+	mapBg();
+	mineXY=	hard1Mine();
+	//itemXY= randomItem();
+	}
+else
+	{
+	easy1Mine();
+	mapBg();
+	//itemXY= randomItem();
+	}
+return mineXY;
+}
+
+
+/*------------------------------키보드와 움직임 관련 함수--------------------------*/
+
+document.addEventListener("keydown", keyDownHandler, false);
+
+function keyDownHandler(e) {
+    if(e.key == "Right"  || e.key == "ArrowRight") {
+        rightPressed = true;
+e.preventDefault();
+	charMotion();
+	char();
+	rightPressed = false;
+    }
+    else if(e.key == "Left" || e.key == "ArrowLeft") {
+        leftPressed = true;
+e.preventDefault();
+	charMotion();
+	char();
+	leftPressed = false;
+    }
+
+  else if(e.key == "Up" || e.key == "ArrowUp") {
+        upPressed = true;
+e.preventDefault();
+	charMotion();
+	char();
+	upPressed = false;
+    }
+
+  else if(e.key == "Down" || e.key == "ArrowDown") {
+        downPressed = true;
+e.preventDefault();
+	charMotion();
+	char();
+	downPressed = false;
+    }
+}
+
+
+/*------------char 함수-----------------------------------------------*/
+function char(){
+	var imgChar=new Image();
+	imgChar.onload=function() {
+		gameCtx.drawImage(imgFace,charX,charY,70,70);
+		if(myHeadImg!="")
+		{gameCtx.drawImage(myHeadImg,charX,charY,70,70);}
+		if(myEyesImg!="")
+		{gameCtx.drawImage(myEyesImg,charX,charY,70,70);}
+		if(myNoseImg!="")
+		{gameCtx.drawImage(myNoseImg,charX,charY,70,70);}
+		if(myChinImg!="")
+		{gameCtx.drawImage(myChinImg,charX,charY,70,70);}	
+		}
+	imgChar.src="icons/백.png";
+	boom();
+	itemGet();
+	finishPoint();
+	//nextStage();
+}
+
+//캐릭터 움직임
+function charMotion(){
+    if(rightPressed && charX < 630) {
+        gameCtx.clearRect(charX,charY,70,70);
+       charX += 70;
+
+    }
+    else if(leftPressed && charX > 0) {
+        gameCtx.clearRect(charX,charY,70,70);
+        charX -= 70;
+    }
+    else if(downPressed && charY < 630) {
+         gameCtx.clearRect(charX,charY,70,70);
+        charY += 70;
+	
+    }
+    else if(upPressed && charY > 0) {
+        gameCtx.clearRect(charX,charY,70,70);
+        charY -= 70;
+    }    
+}
+
+//스코어 관련 변수
+var score=100;
+var scoreUpdate=document.querySelector("#score");
+scoreUpdate.innerHTML=score;
+
+//지뢰 만났을 때 함수 = 캐릭터 위치 처음으로 이동, 터지는 모션
+var arr=[];
+var boomCount=0;
+
+function boom(){
+var imgB=new Image;
+imgB.src="icons/boom.png"
+for (i=0; i<mineXY.length; i++){
+if (mineXY[i][0]*70==charX && mineXY[i][1]*70==charY){
+	gameCtx.drawImage(imgB,charX,charY,70,70);
+	arr.push([charX, charY]);
+	setTimeout(clearBoom, 500);
+	score=Number(score);
+   	score-=5;
+   	scoreUpdate.innerHTML=score;
+	charX=startX;
+	charY=startY;
+	char();
+	boomCount++;
+	}
+ }
+}
+
+//펑삭제
+function clearBoom(){
+for (j=0; j<arr.length; j++){
+gameCtx.clearRect(arr[j][0], arr[j][1], 70, 70)
+}
+//돋보기 사용한 지뢰위치 보여주기
+var boomMine=new Image;
+boomMine.src="icons/지뢰.png";
+for(let f=0; f<itemUseMine.length; f++)
+{
+    gameCtx.drawImage(boomMine, itemUseMine[f][0]*70, itemUseMine[f][1]*70, 70, 70)
+}
+
+}
+
+// finishPoint 모달관련 변수선언
+var modal = document.getElementById("gameover");
+var deadScore =document.getElementById("dead");
+var clearScore=document.getElementById("clear");
+var lefttimeScore=document.getElementById("lefttime");
+var resultScore=document.getElementById("result");
+var span= document.getElementsByClassName("close1")[0];
+var stageNo = document.getElementById("stage");
+
+deadScore.innerHTML = "icons/skull.png" +  " - 점수";
+clearScore.innerHTML = "100점";
+lefttimeScore.innerHTML = "시간 X 1점";
+resultScore.innerHTML = "총 점수" ;
+
+/*--------------------끝 지점 도착 시 모달 함수---------------------*/
+
+function finishPoint(){
+var skull= new Image();
+skull.src="icons/skull.png";
+if(charX==9*70 && charY==0){   
+	timer.stop();
+	score=Number(score);
+	score=score+Number(100)+Number(txtArea.innerHTML);
+	scoreUpdate.innerHTML=score;
+	mineXY=[];
+	itemXY=[];
+	  // modal 창 띄우고 점수 계산하고 맵 지우기 
+	modal.style.display="block"; 
+	        var d=100-(boomCount*5)
+var total=d+Number(100)+Number(txtArea.innerHTML)
+
+stageNo.innerHTML = "현재 스테이지 " + upStage;
+deadScore.innerHTML = "<img src='" + " icons/skull.png' " + ">  "  + "지뢰 폭탄 "+  d + " 점" 
+clearScore.innerHTML = "스테이지 클리어 100점";
+lefttimeScore.innerHTML = "시간 보너스 " + txtArea.innerHTML+" X 1점";
+resultScore.innerHTML = "총 "+ total +"점";
+	}
+}
+
+
+var arr1=[];
+
+/*---------------------모달 창 닫으면 실행되는 새로운 스테이지--------------------*/
+var arr1=[];
+span.onclick=function(){
+   modal.style.display="none";
+   mapCtx.clearRect(0, 0, mapCtx.width, mapCtx.height);
+   gameCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height); 
+   arr1.push([charX, charY]);
+   upStage++;
+   mapBg();
+   newMap();
+itemXY=randomItem();
+   score=Number(score);
+   //score+=100;
+   //scoreUpdate.innerHTML=score;   
+
+   charX=startX;
+   charY=startY;
+   //arr1.replace(charX,charX);
+   //arr1.repalce(charY,charY);
+   char();
+   //독약 초기화
+   window.onkeydown="";
+   itemButton();
+   document.addEventListener("keydown", keyDownHandler, false);
+   itemUseMine=[]    //  돋보기 사용한 지뢰 위치 초기화
+count=41;
+setTimeout(timer.run,  1000);
+   }
+
+
+/*----------------------------순위표 관련 스크립트----------------------------------*/
+/* 혹시모르니까
+var modal = document.getElementById("myModal");
+
+var img = document.getElementById("myImg");
+var modalImg = document.getElementById("img01");
+img.onclick = function(){
+  modal.style.display = "block";
+}
+*/
+
+var closeSpan = document.getElementsByClassName("close")[0];
+
+closeSpan.onclick = function() {
+myModal.style.display = "none";
+var closeSpan = document.getElementsByClassName("close")[0];
+classBtn=document.getElementsByClassName("btn")
+for(var i=0; i<classBtn.length; i++)
+	{
+	classBtn[i].style.display="block";
+	}
+}
+
+var charCode, name, score;
+
+charCode="캐릭터 코드"
+var entryNum=0; //등록 순서, 중복 방지를 위함
+
+function rankingEntry(){
+    score=scoreUpdate.innerHTML;
+    entryNum=localStorage.length;
+    entryNum++;
+    var entryData=[];
+    name=prompt("닉네임 입력");
+    if ( name==null || name=="" ){
+        name="NAME";
+        }
+    var charPath="icons/"+charCode+entryNum+".png"
+    entryData=[score, name];
+    window.localStorage.setItem(charPath, score+"|"+name); //window 생략 가능(전역객체)
+    for(let i=0; i<localStorage.length; i++) {
+        let key = localStorage.key(i);
+        //document.write(`${localStorage.getItem(key)}`,"<BR>");
+    }
+};
+
+
+
+
+
+
+</script>
+</body>
+</html>
